@@ -193,14 +193,14 @@ export default function Home() {
 
               {/* 內容 */}
               <div className="relative space-y-6">
-                {/* 第一段 */}
+                {/* 第一段：福隆地理位置 */}
                 <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
-                  朝山，不只是禮拜一座有形的山，而是一場尋找內心靈山的歸程。
+                  福隆這個地方是台灣雪山山脈的最東北方，地脈深入海底，它和中國南海<span className="whitespace-nowrap">普陀山</span>（<wbr /><span className="whitespace-nowrap">中國最大龍脈</span>-<wbr /><span className="whitespace-nowrap">崑崙山系統山脈</span>）<wbr /><span className="whitespace-nowrap">觀音聖地</span>的地脈相連。在台灣古地圖裡，福隆是台灣的龍頭穴，福隆荖蘭山也是台灣沿海居民心中的聖山。（<wbr />註：荖蘭山是雪山山脈最北方首座山峰。山上多形狀如鳥嘴的巖石，經常有老鷹飛璇天空，當地人叫它鳥嘴山或鷹仔山。因靈鷲山無生道場在此建立，今普稱靈鷲山。）
                 </p>
 
-                {/* 第二段 */}
+                {/* 第二段：開山因緣 */}
                 <p className="text-base md:text-lg text-stone-700 leading-loose mb-6" style={{ letterSpacing: '0.02em' }}>
-                  在靈鷲山，我們延續著四大名山慈悲接引的千年傳承。但我們走得更遠——在山海交會的聖地，我們將這份體力的磨練，轉化為<span className="whitespace-nowrap">「心和平，</span><wbr /><span className="whitespace-nowrap">世界就和平」</span>的當代導引。
+                  這座山早年還沒開發的時候有不少修道人爬到山頂上修行，卻很少有人住得下來。1982年，我因緣來到山上閉關二年，感受這裡真的很有靈氣，之後開山因緣陸續俱足，佛教聖物-<wbr /><span className="whitespace-nowrap">佛像</span>、<wbr /><span className="whitespace-nowrap">佛陀舍利</span>、<wbr /><span className="whitespace-nowrap">摩訶菩提樹</span>以及聖者高僧相繼來山，今天靈鷲山能夠成為台灣佛教聖地之一，也是福隆寶地成就的善緣。
                 </p>
 
                 {/* 第三段 */}
