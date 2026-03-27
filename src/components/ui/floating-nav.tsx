@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface NavItem {
   title: string;
@@ -9,10 +10,11 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { title: "朝山路線", href: "#routes" },
-  { title: "行前準備", href: "#preparation" },
-  { title: "最新活動", href: "#events" },
-  { title: "常見問題", href: "#faq" },
+  { title: "朝山路線", href: "/routes" },
+  { title: "法師開示", href: "/teachings" },
+  { title: "行前準備", href: "/preparation" },
+  { title: "最新活動", href: "/events" },
+  { title: "常見問題", href: "/faq" },
 ];
 
 export function FloatingNav() {
@@ -31,10 +33,7 @@ export function FloatingNav() {
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         scrolled ? "py-3" : "py-5"
       }`}
@@ -57,8 +56,8 @@ export function FloatingNav() {
         >
           <div className="flex items-center justify-between">
             {/* Logo - 左側 */}
-            <a
-              href="#"
+            <Link
+              href="/"
               className="flex items-center gap-3 transition-all duration-500"
               aria-label="靈鷲山首頁"
             >
@@ -119,13 +118,13 @@ export function FloatingNav() {
                   靈鷲山
                 </span>
               </motion.div>
-            </a>
+            </Link>
 
             {/* 桌面版導航 - 中間 */}
             <ul className="hidden md:flex items-center gap-1">
               {navItems.map((item, index) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
                     className={`
                       px-5 py-2 rounded-full font-medium
@@ -138,31 +137,34 @@ export function FloatingNav() {
                     `}
                   >
                     {item.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
 
             {/* CTA 按鈕 - 右側 */}
-            <motion.a
-              href="#contact"
+            <motion.div
               animate={{
                 scale: scrolled ? 0.9 : 1,
               }}
               transition={{ duration: 0.5 }}
-              className={`
-                hidden md:block
-                px-6 py-2 rounded-full font-medium
-                transition-all duration-300
-                ${
-                  scrolled
-                    ? "bg-amber-600 text-white hover:bg-amber-700 shadow-md"
-                    : "bg-white text-amber-900 hover:bg-amber-50 shadow-lg"
-                }
-              `}
+              className="hidden md:block"
             >
-              立即報名
-            </motion.a>
+              <Link
+                href="#contact"
+                className={`
+                  block px-6 py-2 rounded-full font-medium
+                  transition-all duration-300
+                  ${
+                    scrolled
+                      ? "bg-amber-600 text-white hover:bg-amber-700 shadow-md"
+                      : "bg-white text-amber-900 hover:bg-amber-50 shadow-lg"
+                  }
+                `}
+              >
+                立即報名
+              </Link>
+            </motion.div>
 
             {/* 移動版漢堡選單按鈕 */}
             <button
@@ -221,7 +223,7 @@ export function FloatingNav() {
                 <ul className="py-4">
                   {navItems.map((item, index) => (
                     <li key={item.href}>
-                      <a
+                      <Link
                         href={item.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`
@@ -235,11 +237,11 @@ export function FloatingNav() {
                         `}
                       >
                         {item.title}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                   <li className="px-6 pt-4">
-                    <a
+                    <Link
                       href="#contact"
                       onClick={() => setMobileMenuOpen(false)}
                       className={`
@@ -253,7 +255,7 @@ export function FloatingNav() {
                       `}
                     >
                       立即報名
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -261,6 +263,6 @@ export function FloatingNav() {
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 }

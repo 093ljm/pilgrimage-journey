@@ -208,6 +208,58 @@ export default function Home() {
             </div>
           </div>
         </article>
+
+        {/* 心道法師的期勉 */}
+        <div className="max-w-3xl mx-auto mb-16 px-4">
+          <h3 className="font-serif text-2xl md:text-3xl text-amber-900 text-center mb-8 font-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+            心道法師的期勉
+          </h3>
+
+          <div
+            className="relative p-8 md:p-12 rounded-lg shadow-lg"
+            style={{
+              background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%)',
+            }}
+          >
+            {/* 紙張紋理 */}
+            <div
+              className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none rounded-lg"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5' /%3E%3C/svg%3E")`,
+              }}
+            />
+
+            {/* 內容 */}
+            <div className="relative space-y-6">
+              {/* 第一段 */}
+              <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                朝山，不只是禮拜一座有形的山，而是一場尋找內心靈山的歸程。
+              </p>
+
+              {/* 第二段 */}
+              <p className="text-base md:text-lg text-stone-700 leading-loose mb-6" style={{ letterSpacing: '0.02em' }}>
+                在靈鷲山，我們守護著廣欽老和尚<span className="whitespace-nowrap">「老實念佛</span>、<wbr /><span className="whitespace-nowrap">折服我慢」</span>的苦行風範，延續著四大名山慈悲接引的千年傳承。但我們走得更遠——在山海交會的聖地，我們將這份體力的磨練，轉化為<span className="whitespace-nowrap">「心和平，</span><wbr /><span className="whitespace-nowrap">世界就和平」</span>的當代導引。
+              </p>
+
+              {/* 第三段 */}
+              <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                早期上山道路都是泥土碎石，但是大家那時候很虔心朝山，下雨滿地爛泥也不怕髒。特別到了週末假日，好幾台遊覽車開到山下，大家一起朝山拜懺、祈請。還有信眾每回朝山都提鐵桶子放磚瓦，發大願建設道場。所以，靈鷲山的聖山建設也可以說是朝山朝出來的。1988年，我曾經帶弟子到大陸朝禮佛教四大名山：<span className="whitespace-nowrap">普陀山</span>-<wbr /><span className="whitespace-nowrap">觀音道場</span>、<wbr /><span className="whitespace-nowrap">峨嵋山</span>-<wbr /><span className="whitespace-nowrap">普賢道場</span>、<wbr /><span className="whitespace-nowrap">九華山</span>-<wbr /><span className="whitespace-nowrap">地藏道場</span>、<wbr /><span className="whitespace-nowrap">五台山</span>-<wbr /><span className="whitespace-nowrap">文殊道場</span>。這四位菩薩分別代表修行要有慈悲心、實踐力、願力和智慧。後來我決定在靈鷲山的後山修建小四大名山，就是希望到靈鷲山朝山的人能夠和四位菩薩相遇，學習菩薩悲智願行的精神。
+              </p>
+
+              {/* 簽名檔位置預留 */}
+              <div className="flex justify-end mt-12">
+                <div className="w-20 md:w-24 opacity-70">
+                  {/* 簽名圖片 - 請上傳 signature.png 到 /public/images/ 後取消註解 */}
+                  {/* <img
+                    src="/images/signature.png"
+                    alt="心道法師簽名"
+                    className="w-full h-auto"
+                  /> */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );

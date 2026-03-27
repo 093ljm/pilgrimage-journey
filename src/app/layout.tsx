@@ -13,8 +13,9 @@ const notoSerifTC = Noto_Serif_TC({
 });
 
 export const metadata: Metadata = {
-  title: "朝山之旅 - 追尋佛陀的足跡",
-  description: "一場穿越時空的精神歸鄉，探索朝山的傳統與意義。",
+  title: "靈鷲山朝聖之旅 - 山海朝聖 · 覺性回歸",
+  description: "靈鷲山朝山之旅，承兩千年法乳之長流，啟太平洋靈鷲之新章。體驗佛教朝聖傳統，在山海交會的聖地完成心靈洗禮。",
+  keywords: ["靈鷲山", "朝山", "朝聖", "心道法師", "佛教", "修行", "台灣佛教", "福隆"],
 };
 
 export default function RootLayout({
