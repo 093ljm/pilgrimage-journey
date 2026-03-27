@@ -200,7 +200,7 @@ export default function Home() {
 
                 {/* 第二段 */}
                 <p className="text-base md:text-lg text-stone-700 leading-loose mb-6" style={{ letterSpacing: '0.02em' }}>
-                  在靈鷲山，我們守護著廣欽老和尚<span className="whitespace-nowrap">「老實念佛</span>、<wbr /><span className="whitespace-nowrap">折服我慢」</span>的苦行風範，延續著四大名山慈悲接引的千年傳承。但我們走得更遠——在山海交會的聖地，我們將這份體力的磨練，轉化為<span className="whitespace-nowrap">「心和平，</span><wbr /><span className="whitespace-nowrap">世界就和平」</span>的當代導引。
+                  在靈鷲山，我們延續著四大名山慈悲接引的千年傳承。但我們走得更遠——在山海交會的聖地，我們將這份體力的磨練，轉化為<span className="whitespace-nowrap">「心和平，</span><wbr /><span className="whitespace-nowrap">世界就和平」</span>的當代導引。
                 </p>
 
                 {/* 第三段 */}
