@@ -25,3 +25,8 @@
   - 解決方案：將 `hasEverTransitioned` 從 `useRef` 改為 `useState`
   - 新增 `isMounted` 狀態追蹤組件是否已掛載
   - 只有在 `isMounted && hasEverTransitioned` 時才播放動畫
+
+## ⚠️ 重要提醒
+- **定期備份到 GitHub**：每次重要更新後都要 commit 和 push
+- **恢復指南**：如果 AI 當機，請參考 `.same/recovery-guide.md`
+- **正確倉庫**：https://github.com/093ljm/pilgrimage-journey（是 ljm 不是 lim！）
