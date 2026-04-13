@@ -62,7 +62,7 @@ export function FloatingNav() {
                 ? "bg-stone-100/95 shadow-lg"
                 : "bg-black/20 shadow-2xl"
             }
-            ${isScrolled ? "px-6 py-3" : "px-8 py-4"}
+            ${isScrolled ? "px-8 py-3" : "px-10 py-4"}
           `}
           suppressHydrationWarning
         >
@@ -70,7 +70,7 @@ export function FloatingNav() {
             {/* Logo - 左側 */}
             <Link
               href="/"
-              className="flex items-center gap-3 transition-all duration-500"
+              className="flex items-center gap-3 transition-all duration-500 hover:opacity-80 active:scale-95"
               aria-label="靈鷲山首頁"
             >
               <motion.div

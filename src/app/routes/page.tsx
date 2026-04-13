@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -69,19 +68,9 @@ export default function RoutesPage() {
         />
       </div>
 
-      {/* 返回首頁按鈕 */}
-      <div className="container mx-auto px-4 pt-24 pb-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-amber-900 hover:text-amber-700 transition-colors duration-300 group"
-        >
-          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
-          <span className="font-medium">返回首頁</span>
-        </Link>
-      </div>
 
       {/* 主要內容 */}
-      <div className="container mx-auto px-4 pb-16">
+      <div className="container mx-auto px-4 pt-28 pb-16">
         <div className="max-w-4xl mx-auto">
           {/* 頁面標題 */}
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-12 text-stone-800 tracking-wide">
