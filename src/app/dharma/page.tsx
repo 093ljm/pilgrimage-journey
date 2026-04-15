@@ -97,28 +97,6 @@ export default function DharmaPage() {
                 </p>
               </div>
             </div>
-
-            {/* 常存法師開示 */}
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg">
-              <div className="mb-6 border-b border-amber-200 pb-4">
-                <h3 className="font-serif text-2xl md:text-3xl font-bold text-amber-900">
-                  常存法師
-                </h3>
-              </div>
-
-              <div className="space-y-6">
-                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
-                  一次團體朝山圓滿，受邀來開示的常存法師分享自己的<span className="whitespace-nowrap">靈鷲山朝山</span>經驗。在二十多年前，尚未出家的她聽聞靈鷲山殊勝前來朝山。早期上山道路都是碎石子，朝山跪拜時雙腿非常疼痛，無平坦處可避之下，只能不斷告訴自己<span className="whitespace-nowrap">安住當下</span>；隨著天亮太陽出現，又找不到陰涼地，也只好瀟灑接受烈日考驗。累到不想朝山了，可是前不著村後不著店，只能繼續前進，心裡想到了山上要馬上買瓶可樂清涼一下，抵達山頭放眼一望，僅見茅草屋一間，什麼商家也沒有，最後只有釋懷一飲山海。這一趟朝山帶給她最大的體悟就是——<span className="whitespace-nowrap font-medium text-amber-900">放下</span>。人常常分不清需要和想要，心一直外求，朝山是讓心念不斷放下的過程。誠如上師-<span className="whitespace-nowrap">心道法師</span>所說：「人生是夢幻泡影，要有一顆平實心，<span className="whitespace-nowrap">隨遇而安</span>，<span className="whitespace-nowrap">隨緣而住</span>」，這是自然的法則。
-                </p>
-
-                {/* 重點摘要 */}
-                <div className="mt-8 p-6 border-l-4 border-amber-600 bg-gradient-to-r from-amber-50 to-transparent rounded-r-lg">
-                  <p className="font-serif text-lg md:text-xl text-amber-900 font-medium italic leading-relaxed">
-                    心是魔也是佛，看你如何造就它。朝山（拜山）是淨化心靈的修行，腳踏實地慢慢走，慢慢拜，心也會隨著愈來愈清明和靈光。
-                  </p>
-                </div>
-              </div>
-            </div>
           </article>
 
           {/* 分隔裝飾 */}

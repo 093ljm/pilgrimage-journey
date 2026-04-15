@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -136,7 +135,7 @@ export default function RoutesPage() {
             </div>
           </article>
 
-          {/* 底部分隔裝飾 */}
+          {/* 分隔裝飾 */}
           <div className="flex justify-center my-16">
             <div className="w-16 h-16 rounded-full border-2 border-amber-600/30 flex items-center justify-center">
               <div className="w-10 h-10 rounded-full border-2 border-amber-600/50 flex items-center justify-center">
@@ -144,6 +143,93 @@ export default function RoutesPage() {
               </div>
             </div>
           </div>
+
+          {/* 第二部分：行儀說明 */}
+          <article className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-amber-900">
+                二、行儀說明
+              </h2>
+            </div>
+
+            {/* 說明文字 */}
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg mb-10">
+              <p className="text-base md:text-lg text-stone-700 leading-loose mb-6" style={{ letterSpacing: '0.02em' }}>
+                團體朝山以隊伍整齊為主。可指導參與朝山的團員行徑方式，同時提醒不用太在意腳步，重要的是專心持誦佛號，觀照自己的心智。
+              </p>
+
+              <div className="space-y-4">
+                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                  <span className="font-bold text-amber-900">【行徑】</span>持誦聖號「南無本師釋迦牟尼佛」或「南無大悲觀世音菩薩」
+                </p>
+
+                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                  <span className="font-bold text-amber-900">【跪拜】</span>持誦懺悔偈「往昔所造諸惡業，今在佛前求懺悔」
+                </p>
+              </div>
+            </div>
+
+            {/* 步伐表格 */}
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden">
+              {/* 第一組：南無本師釋迦牟尼佛 */}
+              <div className="border-b-4 border-amber-300">
+                <div className="grid grid-cols-8 bg-amber-700 text-white">
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">南無</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">本</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">師</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">釋</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">迦</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">牟</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">尼</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg">佛</div>
+                </div>
+                <div className="grid grid-cols-8 bg-white/40">
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(不動)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(左腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(右腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(左腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(右腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(左腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(右腳)</div>
+                  <div className="p-3 md:p-4 text-center text-xs md:text-sm text-amber-900 font-medium">
+                    <div className="flex flex-col gap-1">
+                      <div>左腳併</div>
+                      <div>跪拜</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 第二組：南無大悲觀世音菩薩 */}
+              <div>
+                <div className="grid grid-cols-8 bg-amber-700 text-white">
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">南無</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">大</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">悲</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">觀</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">世</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">音</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg border-r border-amber-600">菩</div>
+                  <div className="p-3 md:p-4 font-bold text-center text-base md:text-lg">薩</div>
+                </div>
+                <div className="grid grid-cols-8 bg-amber-50/40">
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(不動)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(左腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(右腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(左腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(右腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(左腳)</div>
+                  <div className="p-3 md:p-4 text-center text-sm md:text-base text-stone-700 border-r border-amber-200">(右腳)</div>
+                  <div className="p-3 md:p-4 text-center text-xs md:text-sm text-amber-900 font-medium">
+                    <div className="flex flex-col gap-1">
+                      <div>左腳併</div>
+                      <div>跪拜</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </main>
