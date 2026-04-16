@@ -65,7 +65,7 @@ export default function DharmaPage() {
             </div>
 
             {/* 引言區塊 */}
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg mb-10">
+            <div className="p-8 md:p-10 mb-10 bg-gradient-to-r from-amber-50 to-transparent rounded-lg shadow-lg">
               <div className="text-center space-y-4">
                 <p className="font-serif text-xl md:text-2xl text-stone-800 leading-relaxed">
                   朝山，帶我們回到佛法的最根本<span className="whitespace-nowrap">「修行」</span>
@@ -121,7 +121,7 @@ export default function DharmaPage() {
             </div>
 
             {/* 引言區塊 */}
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg mb-10">
+            <div className="p-8 md:p-10 mb-10 bg-gradient-to-r from-amber-50 to-transparent rounded-lg shadow-lg">
               <div className="text-center space-y-4">
                 <p className="font-serif text-xl md:text-2xl text-stone-800 leading-relaxed">
                   朝山要虔誠專一。

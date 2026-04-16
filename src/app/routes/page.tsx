@@ -159,13 +159,15 @@ export default function RoutesPage() {
               </p>
 
               <div className="space-y-4">
-                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
-                  <span className="font-bold text-amber-900">【行徑】</span>持誦聖號「南無本師釋迦牟尼佛」或「南無大悲觀世音菩薩」
-                </p>
+                <div className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                  <div className="font-bold text-amber-900">【行徑】持誦聖號</div>
+                  <div><span className="whitespace-nowrap">「南無本師釋迦牟尼佛」</span>或<span className="whitespace-nowrap">「南無大悲觀世音菩薩」</span></div>
+                </div>
 
-                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
-                  <span className="font-bold text-amber-900">【跪拜】</span>持誦懺悔偈「往昔所造諸惡業，今在佛前求懺悔」
-                </p>
+                <div className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                  <div className="font-bold text-amber-900">【跪拜】持誦懺悔偈</div>
+                  <div className="whitespace-nowrap">「往昔所造諸惡業，今在佛前求懺悔」</div>
+                </div>
               </div>
             </div>
 
