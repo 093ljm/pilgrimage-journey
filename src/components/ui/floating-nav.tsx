@@ -4,9 +4,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-interface NavItem {
+interface SubNavItem {
   title: string;
   href: string;
+}
+
+interface NavItem {
+  title: string;
+  href?: string;
+  submenu?: SubNavItem[];
 }
 
 const navItems: NavItem[] = [
@@ -16,12 +22,22 @@ const navItems: NavItem[] = [
   { title: "行前準備", href: "/preparation" },
   { title: "最新活動", href: "/events" },
   { title: "常見問題", href: "/faq" },
+  {
+    title: "聖山導覽",
+    submenu: [
+      { title: "聖人", href: "/guide/saints" },
+      { title: "聖物", href: "/guide/relics" },
+      { title: "聖地", href: "/guide/places" },
+    ]
+  },
 ];
 
 export function FloatingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [mobileOpenSubmenu, setMobileOpenSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -134,22 +150,98 @@ export function FloatingNav() {
 
             {/* 桌面版導航 - 中間 */}
             <ul className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`
-                      px-5 py-2 rounded-full font-medium
-                      transition-all duration-300
-                      ${
-                        isScrolled
-                          ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
-                          : "text-white/90 hover:bg-white/20 hover:text-white"
-                      }
-                    `}
-                  >
-                    {item.title}
-                  </Link>
+              {navItems.map((item, index) => (
+                <li
+                  key={item.href || item.title}
+                  className="relative"
+                  onMouseEnter={() => item.submenu && setOpenSubmenu(item.title)}
+                  onMouseLeave={() => item.submenu && setOpenSubmenu(null)}
+                >
+                  {item.submenu ? (
+                    <>
+                      <button
+                        className={`
+                          px-5 py-2 rounded-full font-medium flex items-center gap-1
+                          transition-all duration-300
+                          ${
+                            isScrolled
+                              ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
+                              : "text-white/90 hover:bg-white/20 hover:text-white"
+                          }
+                        `}
+                      >
+                        {item.title}
+                        <svg
+                          className={`w-4 h-4 transition-transform duration-200 ${openSubmenu === item.title ? 'rotate-180' : ''}`}
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+
+                      {/* 下拉菜單 */}
+                      <AnimatePresence>
+                        {openSubmenu === item.title && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className={`
+                              absolute top-full mt-2 left-0 min-w-[160px]
+                              rounded-2xl overflow-hidden backdrop-blur-md shadow-lg
+                              ${
+                                isScrolled
+                                  ? "bg-stone-100/95"
+                                  : "bg-black/30"
+                              }
+                            `}
+                          >
+                            <ul className="py-2">
+                              {item.submenu.map((subItem) => (
+                                <li key={subItem.href}>
+                                  <Link
+                                    href={subItem.href}
+                                    className={`
+                                      block px-6 py-3 font-medium
+                                      transition-all duration-300
+                                      ${
+                                        isScrolled
+                                          ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
+                                          : "text-white/90 hover:bg-white/10 hover:text-white"
+                                      }
+                                    `}
+                                  >
+                                    {subItem.title}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href!}
+                      className={`
+                        px-5 py-2 rounded-full font-medium
+                        transition-all duration-300
+                        ${
+                          isScrolled
+                            ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
+                            : "text-white/90 hover:bg-white/20 hover:text-white"
+                        }
+                      `}
+                    >
+                      {item.title}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -234,22 +326,85 @@ export function FloatingNav() {
               >
                 <ul className="py-4">
                   {navItems.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className={`
-                          block px-8 py-4 font-medium
-                          transition-all duration-300
-                          ${
-                            isScrolled
-                              ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
-                              : "text-white/90 hover:bg-white/10 hover:text-white"
-                          }
-                        `}
-                      >
-                        {item.title}
-                      </Link>
+                    <li key={item.href || item.title}>
+                      {item.submenu ? (
+                        <>
+                          <button
+                            onClick={() => setMobileOpenSubmenu(mobileOpenSubmenu === item.title ? null : item.title)}
+                            className={`
+                              w-full flex items-center justify-between px-8 py-4 font-medium
+                              transition-all duration-300
+                              ${
+                                isScrolled
+                                  ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
+                                  : "text-white/90 hover:bg-white/10 hover:text-white"
+                              }
+                            `}
+                          >
+                            {item.title}
+                            <svg
+                              className={`w-4 h-4 transition-transform duration-200 ${mobileOpenSubmenu === item.title ? 'rotate-180' : ''}`}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </button>
+
+                          {/* 移動版子菜單 */}
+                          <AnimatePresence>
+                            {mobileOpenSubmenu === item.title && (
+                              <motion.ul
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="overflow-hidden"
+                              >
+                                {item.submenu.map((subItem) => (
+                                  <li key={subItem.href}>
+                                    <Link
+                                      href={subItem.href}
+                                      onClick={() => setMobileMenuOpen(false)}
+                                      className={`
+                                        block pl-12 pr-8 py-3 font-medium
+                                        transition-all duration-300
+                                        ${
+                                          isScrolled
+                                            ? "text-stone-600 hover:bg-amber-50 hover:text-amber-900"
+                                            : "text-white/80 hover:bg-white/5 hover:text-white"
+                                        }
+                                      `}
+                                    >
+                                      {subItem.title}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </motion.ul>
+                            )}
+                          </AnimatePresence>
+                        </>
+                      ) : (
+                        <Link
+                          href={item.href!}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`
+                            block px-8 py-4 font-medium
+                            transition-all duration-300
+                            ${
+                              isScrolled
+                                ? "text-stone-700 hover:bg-amber-100 hover:text-amber-900"
+                                : "text-white/90 hover:bg-white/10 hover:text-white"
+                            }
+                          `}
+                        >
+                          {item.title}
+                        </Link>
+                      )}
                     </li>
                   ))}
                   <li className="px-6 pt-4">

@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,13 +9,43 @@ export default function FAQPage() {
   const faqs = [
     {
       id: "q1",
-      question: "為什麼要修行？",
-      content: {
-        paragraphs: [
-          "朝山到底在拜什麼？為什麼要拜？心道法師說，朝山（拜山）是在禮拜佛法真理。因為人心都會有迷惑、矛盾、顛倒妄想，生活中也會發生許多不如意、不協調的事情，如果願意認識和實踐佛法真理，就會對七情六欲由來開竅，知道如何面對和處理。朝山一步一腳，一起一拜，不但身體變健康，心也會更定靜、柔軟，慢慢明心見性開智慧。所以，朝山是治馭像猴子一樣調皮的心非常有效的修行法門。",
-        ],
-      },
-      highlight: "朝山，帶我們回到佛法的最根本「修行」，目的就是為了幫助自己「調心」",
+      question: "第一次朝山會不會很累？體力不好可以參加嗎？",
+      answer: "朝山確實需要一定的體力，但更重要的是用心和虔誠。我們建議初次參加者可以選擇較短的路線，循序漸進。過程中可以隨時休息，沒有時間壓力。許多體力較弱的信眾，透過虔誠的心念和團體的支持，都能順利完成朝山。重要的是量力而為，聆聽自己身體的聲音。",
+    },
+    {
+      id: "q2",
+      question: "朝山一定要一步一拜嗎？可以用走的嗎？",
+      answer: "朝山的方式有多種，包括三步一拜、一步一拜，或是虔誠步行。最重要的是心誠則靈，以恭敬心和清淨心來進行。對於初學者或體力較弱者，可以採用步行的方式，同樣能獲得修行的利益。重點在於專注當下，觀照自己的心念。",
+    },
+    {
+      id: "q3",
+      question: "朝山時心裡要想什麼？可以祈求事情嗎？",
+      answer: "朝山時建議專心持誦佛號或懺悔偈，保持心念清淨。可以懷著感恩、懺悔、祈願的心，但不要執著於特定的祈求。朝山是修行的過程，透過身體的禮拜，淨化心靈，增長智慧。當心清淨了，自然能與佛心相應，得到真正的利益。",
+    },
+    {
+      id: "q4",
+      question: "朝山一定要有佛教基礎嗎？沒學佛可以參加嗎？",
+      answer: "朝山歡迎所有有心學習的朋友參加，不需要有佛教基礎。我們會在活動前說明朝山的意義、方法和注意事項。許多人就是透過朝山開始接觸佛法，體會修行的殊勝。保持開放和恭敬的心，就是最好的準備。",
+    },
+    {
+      id: "q5",
+      question: "身體狀況不好、年紀大，還能朝山嗎？",
+      answer: "我們建議年長或身體狀況特殊的朋友，在參加前先諮詢醫師意見。朝山活動會有多條路線可選擇，包括較平緩、時間較短的路線。現場也會有護法志工協助。最重要的是評估自身狀況，量力而為，安全第一。若無法實際朝山，也可以透過其他方式修行。",
+    },
+    {
+      id: "q6",
+      question: "朝山前需要準備什麼？衣服、裝備怎麼選？",
+      answer: "建議穿著輕便、吸汗、易活動的服裝，以運動服或寬鬆衣物為佳。鞋子選擇止滑、包覆性好的運動鞋或布鞋。可準備毛巾、水壺、遮陽帽等。避免穿著過於暴露或緊身的服裝。詳細的裝備清單會在報名後提供，也可參考「行前準備」頁面。",
+    },
+    {
+      id: "q7",
+      question: "下雨天還會朝山嗎？遇到天氣不好怎麼辦？",
+      answer: "小雨通常不影響朝山活動進行，但會評估天候狀況。若遇颱風、豪雨等惡劣天氣，基於安全考量會延期或取消，並提前通知參加者。建議準備雨具備用。朝山重視的是修行的心，無論晴雨，保持清淨心最重要。",
+    },
+    {
+      id: "q8",
+      question: "朝山和參加一般法會有什麼不同？",
+      answer: "朝山是動態的修行方式，透過身體的禮拜和行走，結合持誦佛號，達到身心合一的修持。一般法會則以靜態的誦經、聽法為主。朝山更強調實際的身體力行，在過程中磨練心性，去除我慢。兩者都是殊勝的修行法門，各有其特色和利益。",
     },
   ];
 
@@ -68,34 +97,19 @@ export default function FAQPage() {
 
           {/* FAQ 列表 */}
           <div className="space-y-8">
-            {faqs.map((faq) => (
+            {faqs.map((faq, index) => (
               <div key={faq.id} className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg">
                 {/* 問題 */}
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-amber-900 mb-6">
-                  Q1. {faq.question}
+                  Q{index + 1}. {faq.question}
                 </h2>
 
                 {/* 答案 */}
-                <div className="space-y-4">
-                  {faq.content.paragraphs.map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className="text-base md:text-lg text-stone-700 leading-loose"
-                      style={{ letterSpacing: '0.02em' }}
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
+                <div className="p-6 bg-gradient-to-r from-amber-50 to-transparent rounded-lg">
+                  <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                    {faq.answer}
+                  </p>
                 </div>
-
-                {/* 重點摘要 */}
-                {faq.highlight && (
-                  <div className="mt-8 p-6 border-l-4 border-amber-600 bg-gradient-to-r from-amber-50 to-transparent rounded-r-lg">
-                    <p className="font-serif text-lg md:text-xl text-amber-900 font-medium italic">
-                      {faq.highlight}
-                    </p>
-                  </div>
-                )}
               </div>
             ))}
           </div>
