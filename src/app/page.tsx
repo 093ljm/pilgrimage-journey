@@ -169,6 +169,45 @@ export default function Home() {
           {/* 分隔線 */}
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent mx-auto mb-16" />
 
+          {/* 靈鷲山道場介紹 */}
+          <div className="max-w-3xl mx-auto mb-16">
+            <h3 className="font-serif text-2xl md:text-3xl text-amber-900 text-center mb-8 font-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
+              靈鷲山道場介紹
+            </h3>
+
+            <div
+              className="relative p-8 md:p-12 rounded-lg shadow-xl"
+              style={{
+                background: 'rgba(254, 243, 199, 0.6)',
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              {/* 紙張紋理 */}
+              <div
+                className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none rounded-lg"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise2'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise2)' opacity='0.5' /%3E%3C/svg%3E")`,
+                }}
+              />
+
+              {/* 內容 */}
+              <div className="relative space-y-6">
+                {/* 第一段：聖山寺金佛園區 */}
+                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                  靈鷲山無生道場成立於西元1984年，由開山和尚心道法師所創，座落台灣東北角風景線上。從台北沿著福隆火車站往宜蘭方向的濱海公路前進六百公尺左右，是靈鷲山分院<span className="whitespace-nowrap">「聖山寺金佛園區」</span>，為本山宗教文化教育園區，主殿供奉三尊經當今泰國國王應允鎔鑄等身分尊的十四世紀素可泰王朝國寶金佛－<span className="whitespace-nowrap">平安佛</span>、<span className="whitespace-nowrap">圓滿佛</span>、<span className="whitespace-nowrap">成功佛</span>，展現現代南北傳佛教重大文化交流之成果，成為靈鷲山在北台灣福隆一帶的心靈地標，也是東北角重要的自然休憩、宗教人文參訪勝地。
+                </p>
+
+                {/* 第二段：無生道場 */}
+                <p className="text-base md:text-lg text-stone-700 leading-loose" style={{ letterSpacing: '0.02em' }}>
+                  聖山寺金佛園區繼續往宜蘭方向約二百公尺的右方是荖蘭山的入山道路，一路山坡挺進直達靈鷲山無生道場的四大名山道場，環山朝山步道盡頭為開山緣起的洞窟一隅，為當年心道法師斷食閉關的<span className="whitespace-nowrap">「法華洞窟」</span>。這裡，觸目是紅瓦石屋，山間林道的石板路，錯落安置著青斗石雕的五百羅漢，石砌舍利塔林，以及來自斯里蘭卡的第三代<span className="whitespace-nowrap">「摩訶菩提聖樹」</span>、緬甸白玉石佛像等。諸種象徵修行成就的聖跡聖物，安奉在自然和諧、純樸寧靜、天地壯闊的山海之巔，展現新時代的禪風。靈鷲山為現代社會提供了一處回歸本來、安頓身心的角落，更是為世界展示一處以推動生態倫理、和平教育為特色的心靈聖地。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 分隔線 */}
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent mx-auto mb-16" />
+
           {/* 心道法師的期勉 */}
           <div className="max-w-3xl mx-auto mb-16">
             <h3 className="font-serif text-2xl md:text-3xl text-amber-900 text-center mb-8 font-bold" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
