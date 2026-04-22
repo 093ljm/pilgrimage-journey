@@ -157,8 +157,8 @@ export default function Home() {
 
         <article className="relative max-w-4xl mx-auto">
           {/* 主標題 */}
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 text-stone-800 tracking-wide">
-            靈鷲山<br/>山海朝聖 · <span className="whitespace-nowrap">覺性回歸</span>
+          <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-center mb-6 text-stone-800 tracking-wide">
+            靈鷲山<br/><span className="whitespace-nowrap">山海朝聖 · 覺性回歸</span>
           </h2>
 
           {/* 引言 */}
