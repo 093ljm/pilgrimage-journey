@@ -1,0 +1,7 @@
+{
+  "name": "pilgrimage-journey",
+  "description": "靈鷲山朝山之旅 Landing Page",
+  "framework": "nextjs-shadcn",
+  "created": "2026-03-13",
+  "version": "1.0.0"
+}
