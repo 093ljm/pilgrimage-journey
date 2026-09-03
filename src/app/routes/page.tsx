@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Note } from "@/components/ui/note";
 
 export const metadata: Metadata = {
   title: "朝山路線與行儀 - 靈鷲山朝聖之旅",
@@ -122,9 +123,9 @@ export default function RoutesPage() {
                       {route.path}
                     </p>
                     {route.note && (
-                      <p className="mt-3 text-sm text-stone-500 leading-relaxed bg-amber-100/50 p-3 rounded-lg">
-                        ※ {route.note}
-                      </p>
+                      <Note boxed className="mt-3">
+                        {route.note}
+                      </Note>
                     )}
                   </div>
                   <div className="p-4 md:p-5 text-center text-base md:text-lg text-amber-900 font-medium flex items-center justify-center">

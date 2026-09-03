@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Note } from "@/components/ui/note";
 import {
   clothingItems,
   carryItems,
+  arrivalOptions,
+  mapLinks,
   beforeYouGo,
-  ritualSteps,
 } from "@/data/preparation";
 
 export const metadata: Metadata = {
@@ -223,6 +225,123 @@ export default function PreparationPage() {
           <section className="mb-16">
             <SectionHeading num="三" title="出發前須知" en="Good to Know" />
 
+            {/* 抵達方式 */}
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-7 md:p-9 shadow-lg mb-5">
+              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-6">
+                <h3 className="font-serif text-xl md:text-2xl font-bold text-amber-900">
+                  抵達方式
+                </h3>
+                <p className="text-sm text-stone-600">
+                  抵達方式不同，朝山的起點也不同
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {arrivalOptions.map((a) => (
+                  <div
+                    key={a.id}
+                    className="flex flex-col rounded-2xl bg-amber-50/70 border border-amber-200/70 p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-md"
+                  >
+                    <span className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 text-white shadow-sm mb-4">
+                      <ArrivalIcon type={a.icon} />
+                    </span>
+                    <h4 className="font-serif text-lg font-bold text-stone-800 mb-2.5">
+                      {a.mode}
+                    </h4>
+                    <span className="self-start inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-amber-300/70 pl-2.5 pr-3.5 py-1 mb-3.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      <span className="text-sm font-medium text-amber-800">
+                        起點 · {a.start}
+                      </span>
+                    </span>
+                    <p className="text-base text-stone-700 leading-relaxed" style={{ letterSpacing: "0.02em" }}>
+                      {a.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* 導航連結（純連結，不嵌入地圖） */}
+              <div className="mt-8 pt-7 border-t border-amber-200/70">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="flex items-center justify-center w-8 h-8 flex-shrink-0 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 text-white shadow-sm">
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="1.9"
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z" />
+                      <circle cx="12" cy="10" r="2.4" />
+                    </svg>
+                  </span>
+                  <h4 className="font-serif text-lg md:text-xl font-bold text-amber-900">
+                    導航
+                  </h4>
+                  <span className="flex-1 h-px bg-gradient-to-r from-amber-500/35 to-transparent" />
+                  <span className="hidden sm:inline text-sm text-stone-500">
+                    於新分頁開啟 Google 地圖
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {mapLinks.map((m) => (
+                    <a
+                      key={m.id}
+                      href={m.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-start gap-3 rounded-xl bg-white/85 border border-amber-200/80 px-4 py-3.5 shadow-sm transition-all duration-300 hover:bg-white hover:border-amber-400/80 hover:-translate-y-0.5 hover:shadow-md"
+                    >
+                      <span className="mt-0.5 flex items-center justify-center w-7 h-7 flex-shrink-0 rounded-full bg-amber-100 text-amber-700 transition-colors duration-300 group-hover:bg-amber-600 group-hover:text-white">
+                        <svg
+                          className="w-3.5 h-3.5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden="true"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z" />
+                          <circle cx="12" cy="10" r="2.4" />
+                        </svg>
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="flex items-center gap-1.5">
+                          <span className="font-medium text-stone-800">
+                            {m.label}
+                          </span>
+                          <svg
+                            className="w-3 h-3 flex-shrink-0 text-amber-600/60 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            aria-hidden="true"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+                          </svg>
+                        </span>
+                        <span className="block mt-0.5 text-sm text-stone-500 leading-snug">
+                          {m.note}
+                        </span>
+                      </span>
+                    </a>
+                  ))}
+                </div>
+
+                <Note className="mt-4">
+                  地藏廣場位在入山道路途中的紅色鐵皮屋，導航設定「靈鷲山無生道場」沿途即會經過。
+                </Note>
+              </div>
+
+              <Note className="mt-2">
+                停車空間有限，請勿臨停於濱海公路路肩；現場一律依交通組指引停放。
+              </Note>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {beforeYouGo.map((b, index) => (
                 <div
@@ -240,75 +359,6 @@ export default function PreparationPage() {
                   </p>
                 </div>
               ))}
-            </div>
-          </section>
-
-          {/* 分隔裝飾 */}
-          <Divider />
-
-          {/* ===== 四、當天的節奏 ===== */}
-          <section className="mb-16">
-            <SectionHeading num="四" title="當天的節奏" en="The Rhythm of the Day" />
-
-            <p className="text-base md:text-lg text-stone-700 leading-loose mb-7" style={{ letterSpacing: "0.02em" }}>
-              靈鷲山朝山儀軌分為三段——前行、正行、結行。
-            </p>
-
-            <div className="relative">
-              {/* 縱向連接線（桌面版隱藏，手機版顯示） */}
-              <div className="absolute left-[1.35rem] top-6 bottom-6 w-px bg-gradient-to-b from-amber-400/60 via-amber-500/40 to-transparent sm:hidden" />
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                {ritualSteps.map((step, index) => (
-                  <div
-                    key={step.id}
-                    className="relative flex sm:block gap-5 sm:gap-0"
-                  >
-                    {/* 序號圓點 */}
-                    <span className="relative z-10 flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 text-white font-serif text-lg font-bold shadow-md sm:mb-4">
-                      {index + 1}
-                    </span>
-
-                    <div className="flex-1 bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                      <p className="font-serif text-xs tracking-[0.25em] text-amber-700/70 uppercase mb-1">
-                        {step.en}
-                      </p>
-                      <h3 className="font-serif text-xl font-bold text-amber-900 mb-4">
-                        {step.stage}
-                      </h3>
-                      <ul className="space-y-2.5">
-                        {step.items.map((item) => (
-                          <li key={item} className="flex items-start gap-2.5">
-                            <span className="mt-2 w-1.5 h-1.5 flex-shrink-0 rounded-full bg-amber-500" />
-                            <span className="text-base text-stone-700 leading-relaxed">
-                              {item}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 導向朝山路線與行儀 */}
-            <div className="mt-7 text-center">
-              <Link
-                href="/routes"
-                className="group inline-flex items-center gap-1.5 font-medium text-amber-700 transition-all duration-300 hover:text-amber-900"
-              >
-                查看完整朝山路線與行儀
-                <svg
-                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
             </div>
           </section>
 
@@ -367,5 +417,49 @@ function Divider() {
         </div>
       </div>
     </div>
+  );
+}
+
+// 抵達方式圖示
+function ArrivalIcon({ type }: { type: "car" | "shuttle" | "train" }) {
+  const common = {
+    className: "w-5 h-5",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor",
+    strokeWidth: 1.8,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  if (type === "car") {
+    return (
+      <svg {...common} aria-hidden="true">
+        <path d="M4.5 13.5l1.6-4.2A2 2 0 0 1 8 8h8a2 2 0 0 1 1.9 1.3l1.6 4.2" />
+        <path d="M4 13.5h16a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2.5a1 1 0 0 1 1-1z" />
+        <path d="M6.5 18v1.5M17.5 18v1.5" />
+        <path d="M6.5 15.7h1M16.5 15.7h1" />
+      </svg>
+    );
+  }
+
+  if (type === "shuttle") {
+    return (
+      <svg {...common} aria-hidden="true">
+        <path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h13A1.5 1.5 0 0 1 20 6.5V16a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5z" />
+        <path d="M4 11h16" />
+        <path d="M7 17v2M17 17v2" />
+        <path d="M7.5 14h1M15.5 14h1" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common} aria-hidden="true">
+      <path d="M6.5 5.5A1.5 1.5 0 0 1 8 4h8a1.5 1.5 0 0 1 1.5 1.5v10A1.5 1.5 0 0 1 16 17H8a1.5 1.5 0 0 1-1.5-1.5v-10z" />
+      <path d="M6.5 10.5h11" />
+      <path d="M9.5 13.8h.01M14.5 13.8h.01" />
+      <path d="M9 17l-2 3M15 17l2 3" />
+    </svg>
   );
 }

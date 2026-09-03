@@ -1,0 +1,26 @@
+{
+  "annualPilgrimageDays": [
+    {
+      "id": "p1",
+      "name": "誕辰日",
+      "date": "2026/4/5",
+      "season": "春耕・發願"
+    },
+    {
+      "id": "p2",
+      "name": "成道日",
+      "date": "2026/8/1",
+      "season": "夏耘・精進"
+    },
+    {
+      "id": "p3",
+      "name": "出家日",
+      "date": "2026/10/25",
+      "season": "秋成・圓滿"
+    }
+  ],
+  "location": "靈鷲山無生道場・地藏廣場前",
+  "registerVia": "靈鷲山各據點朝山團",
+  "phone": "02-24991100",
+  "phoneExt": "3401"
+}

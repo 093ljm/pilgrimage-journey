@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PilgrimageDays } from "@/components/ui/pilgrimage-days";
+import { Note } from "@/components/ui/note";
+import { getGuanyinAssembliesSettings } from "@/lib/content";
 import {
-  annualPilgrimageDays,
-  pilgrimageInfo,
   specialEvents,
   pilgrimageGroup,
   hallsDirectory,
@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 };
 
 export default function EventsInfoPage() {
+  const guanyinAssemblies = getGuanyinAssembliesSettings();
+  const annualPilgrimageDays = guanyinAssemblies.annualPilgrimageDays;
+  const pilgrimageInfo = {
+    location: guanyinAssemblies.location,
+    registerVia: guanyinAssemblies.registerVia,
+    phone: guanyinAssemblies.phone,
+    phoneExt: guanyinAssemblies.phoneExt,
+  };
+
   return (
     <main className="min-h-screen relative">
       {/* 背景層 */}
@@ -100,9 +109,9 @@ export default function EventsInfoPage() {
             <PilgrimageDays days={annualPilgrimageDays} />
 
             {/* 日期訂定說明 */}
-            <p className="mb-7 text-sm text-stone-600 leading-relaxed">
-              ※ 三會日期依農曆觀音誕辰、成道、出家日訂定，並調整於週末舉行，方便十方信眾共同參與。
-            </p>
+            <Note className="mb-7">
+              三會日期依農曆觀音誕辰、成道、出家日訂定，並調整於週末舉行，方便十方信眾共同參與。
+            </Note>
 
             {/* 地點與報名方式 */}
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-7 shadow-lg">
@@ -312,9 +321,9 @@ export default function EventsInfoPage() {
                   <p className="text-base text-stone-700 leading-relaxed">
                     {hallsDirectory.desc}
                   </p>
-                  <p className="mt-2 text-sm text-stone-500">
+                  <Note className="mt-2">
                     連結將另開新視窗，方便您隨時切換回本站。
-                  </p>
+                  </Note>
                 </div>
               </div>
               <span className="inline-flex flex-shrink-0 items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium bg-amber-600 text-white shadow-sm transition-all duration-300 group-hover:bg-amber-700 group-hover:translate-x-1">
@@ -432,7 +441,7 @@ export default function EventsInfoPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>
                             </a>
-                            <p className="mt-2 text-sm text-stone-500">連結將另開新視窗</p>
+                            <Note className="mt-2">連結將另開新視窗</Note>
                           </div>
                         )}
                       </div>

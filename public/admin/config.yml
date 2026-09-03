@@ -1,0 +1,89 @@
+backend:
+  name: github
+  repo: 093ljm/pilgrimage-journey
+  branch: main
+  squash_merges: true
+
+local_backend: true
+locale: zh_Hant
+publish_mode: simple
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: life_stories
+    label: 生命故事
+    label_singular: 生命故事
+    folder: content/life-stories
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: "{{displayOrder}}｜{{title}}｜{{name}}"
+    sortable_fields: [displayOrder, title, name]
+    view_filters:
+      - label: 已發布
+        field: published
+        pattern: true
+      - label: 草稿
+        field: published
+        pattern: false
+    fields:
+      - { label: 唯一代號, name: id, widget: string, hint: "建議格式：s-英文名稱，不可與其他故事重複" }
+      - { label: 網址代稱, name: slug, widget: string, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', '只能輸入小寫英文字母、數字與連字號'] }
+      - { label: 見證者稱呼, name: name, widget: string }
+      - { label: 身分／背景, name: role, widget: string }
+      - { label: 故事標題, name: title, widget: string }
+      - { label: 故事摘要, name: summary, widget: text }
+      - { label: 封面照片, name: coverImage, widget: image, required: false, hint: "建議使用橫式 WebP 或壓縮 JPG，每張不超過 1MB" }
+      - { label: 內文照片, name: contentImage, widget: image, required: false, hint: "每篇最多兩張照片，此欄為第二張" }
+      - { label: YouTube 影片連結, name: videoUrl, widget: string, required: false }
+      - { label: 本站影片路徑, name: videoFile, widget: string, required: false, hint: "既有影片保留使用；新影片建議上傳 YouTube" }
+      - { label: 顯示順序, name: displayOrder, widget: number, value_type: int, min: 1, max: 10 }
+      - { label: 發布, name: published, widget: boolean, default: true }
+      - { label: 完整文章, name: body, widget: markdown, hint: "段落小標請使用二級標題；生命故事總數最多 10 篇" }
+
+  - name: guanyin_assemblies
+    label: 最新活動（觀音三會）
+    files:
+      - label: 觀音三會與報名資訊
+        name: guanyin_three_assemblies
+        file: content/settings/guanyin-three-assemblies.json
+        format: json
+        fields:
+          - label: 三會日期
+            name: annualPilgrimageDays
+            widget: list
+            min: 3
+            max: 3
+            collapsed: false
+            fields:
+              - { label: 唯一代號, name: id, widget: string }
+              - { label: 名稱, name: name, widget: select, options: [誕辰日, 成道日, 出家日] }
+              - { label: 日期, name: date, widget: string, pattern: ['^\\d{4}/\\d{1,2}/\\d{1,2}$', '格式必須為 年/月/日，例如 2026/4/5'] }
+              - { label: 節氣意象, name: season, widget: string }
+          - { label: 集合地點, name: location, widget: string }
+          - { label: 報名方式, name: registerVia, widget: string }
+          - { label: 聯絡電話, name: phone, widget: string }
+          - { label: 分機, name: phoneExt, widget: string }
+
+  - name: teachings
+    label: 法師開示
+    label_singular: 法師開示
+    folder: content/teachings
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: "{{displayOrder}}｜{{title}}"
+    sortable_fields: [displayOrder, title]
+    fields:
+      - { label: 唯一代號, name: id, widget: string, hint: "使用小寫英文與連字號，不可重複" }
+      - { label: 顯示名稱, name: title, widget: string }
+      - { label: 開示法師, name: author, widget: string }
+      - { label: 重點摘要, name: highlight, widget: text, required: false }
+      - { label: 顯示順序, name: displayOrder, widget: number, value_type: int, min: 1 }
+      - { label: 發布, name: published, widget: boolean, default: true }
+      - { label: 開示內文, name: body, widget: markdown }

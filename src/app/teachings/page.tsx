@@ -1,5 +1,5 @@
-
 import type { Metadata } from "next";
+import { getTeachings } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "法師開示 - 靈鷲山朝聖之旅",
@@ -7,19 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default function TeachingsPage() {
-  const teachings = [
-    {
-      id: "chang-cun",
-      title: "常存法師",
-      author: "常存法師",
-      content: {
-        paragraphs: [
-          "一次團體朝山圓滿，受邀來開示的常存法師分享自己的靈鷲山朝山經驗。在二十多年前，尚未出家的她聽聞靈鷲山殊勝前來朝山。早期上山道路都是碎石子，朝山跪拜時雙腿非常疼痛，無平坦處可避之下，只能不斷告訴自己安住當下；隨著天亮太陽出現，又找不到陰涼地，也只好瀟灑接受烈日考驗。累到不想朝山了，可是前不著村後不著店，只能繼續前進，心裡想到了山上要馬上買瓶可樂清涼一下，抵達山頭放眼一望，僅見茅草屋一間，什麼商家也沒有，最後只有釋懷一飲山海。這一趟朝山帶給她最大的體悟就是-放下。人常常分不清需要和想要，心一直外求，朝山是讓心念不斷放下的過程。誠如上師-心道法師所說：「人生是夢幻泡影，要有一顆平實心，隨遇而安，隨緣而住」，這是自然的法則。",
-        ],
-      },
-      highlight: "心是魔也是佛，看你如何造就它。朝山（拜山）是淨化心靈的修行，腳踏實地慢慢走，慢慢拜，心也會隨著愈來愈清明和靈光。",
-    },
-  ];
+  const teachings = getTeachings();
 
   return (
     <main className="min-h-screen relative">
@@ -83,7 +71,7 @@ export default function TeachingsPage() {
 
                 {/* 內容 */}
                 <div className="space-y-4">
-                  {teaching.content.paragraphs.map((paragraph, index) => (
+                  {teaching.paragraphs.map((paragraph, index) => (
                     <p
                       key={index}
                       className="text-base md:text-lg text-stone-700 leading-loose"
