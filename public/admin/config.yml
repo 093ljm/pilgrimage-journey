@@ -46,8 +46,8 @@ collections:
       - { label: 身分／背景, name: role, widget: string }
       - { label: 故事標題, name: title, widget: string }
       - { label: 故事摘要, name: summary, widget: text }
-      - { label: 封面照片, name: coverImage, widget: image, required: false, hint: "上傳前請把檔名改成英文或數字，例如 story-01.jpg；建議橫式、每張不超過 1MB" }
-      - { label: 內文照片, name: contentImage, widget: image, required: false, hint: "每篇最多兩張照片，此欄為第二張；檔名同樣使用英文或數字" }
+      - { label: 封面照片, name: coverImage, widget: image, required: false, hint: "建議橫式。網站會自動縮圖，不必自己壓縮，但請盡量選 3MB 以內的檔案；檔名建議用英文或數字，例如 story-01.jpg" }
+      - { label: 內文照片, name: contentImage, widget: image, required: false, hint: "每篇最多兩張照片，此欄為第二張。同樣會自動縮圖，檔名建議用英文或數字" }
       - { label: 影片連結（YouTube 或其他）, name: videoUrl, widget: string, required: false, pattern: ['^$|^https://', '請貼上完整網址，需以 https:// 開頭'], hint: "YouTube 各種網址都可以（watch、youtu.be、shorts、live），會直接嵌入播放；Podcast 等其他連結會顯示為另開新視窗的按鈕" }
       - { label: 本站影片檔路徑, name: videoFile, widget: string, required: false, pattern: ['^$|^/', '需以斜線開頭，例如 /videos/story.mp4；外部網址請改填上面的影片連結'], hint: "僅供已放在本站的影片檔使用，一般情況請留空" }
       - { label: 顯示順序, name: displayOrder, widget: number, value_type: int, min: 1, max: 10 }

@@ -1,5 +1,5 @@
 [images]
-  remote_images = ["https://source.unsplash.com/.*", "https://images.unsplash.com/.*", "https://ext.same-assets.com/.*", "https://ugc.same-assets.com/.*"]
+  remote_images = ["https://source.unsplash.com/.*", "https://images.unsplash.com/.*", "https://ext.same-assets.com/.*", "https://ugc.same-assets.com/.*", "https://i.ytimg.com/.*"]
 
 [build]
   command = "bun run build"
@@ -11,3 +11,36 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# ============================================================
+# 快取設定
+# ------------------------------------------------------------
+# ★ 為什麼要加這段？
+#   Netlify 預設會用 stale-while-revalidate：第一次連線先回舊版本，
+#   背景才去抓新的。結果是後台改完內容後，要重新整理兩次才看得到，
+#   管理人員會以為沒存檔成功。
+#
+#   下面把網頁改成「一定先向伺服器確認」，內容更新後第一次就是新的。
+#   靜態檔案（檔名帶雜湊值，改了就會換檔名）則維持長期快取，速度不受影響。
+# ============================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Netlify-CDN-Cache-Control = "public, max-age=0, must-revalidate, durable"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, immutable, durable"
+
+[[headers]]
+  for = "/_next/image*"
+  [headers.values]
+    Netlify-CDN-Cache-Control = "public, max-age=2592000, durable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Netlify-CDN-Cache-Control = "public, max-age=604800, durable"
