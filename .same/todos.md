@@ -1,5 +1,49 @@
 # 靈鷲山朝聖之旅 - 專案待辦事項
 
+## 🔑 內容管理後台（2026-09-07 建置中）
+
+### 正式資源
+- Repository：`093ljm/pilgrimage-journey`（分支 `main`）
+- 正式網站：https://frolicking-begonia-5ec310.netlify.app
+- 內容管理後台：`/admin`
+- 操作示範（免登入、不會存檔，可用於教學）：`/admin/demo`
+- 分水嶺標籤：`pre-decap-login-test-v1`
+
+### 架構決策（★ 給未來的自己／新 AI）
+- **不使用資料庫**。曾評估 Supabase，但免費方案閒置七天會暫停，
+  且多一層服務就多一個停擺風險 → 改回純 Git 檔案。
+- 內容管理採 **Decap CMS**，管理者用自己的 GitHub 帳號登入，本站不保存任何密碼。
+- 登入採**自建 OAuth**（Netlify Functions），不依賴即將淘汰的 Netlify Identity。
+- 後台會自動偵測目前網域，**換網域不需改程式碼**，只需改 GitHub OAuth App 設定。
+
+### 內容檔案位置（改內容只要動這些）
+- 生命故事：`content/life-stories/*.md`（最多 10 篇）
+- 法師開示：`content/teachings/*.md`
+- 觀音三會：`content/settings/guanyin-three-assemblies.json`
+- 後台設定：`public/admin/config.yml`
+- 登入函式：`netlify/functions/auth.mjs`、`callback.mjs`
+
+### 已完成
+- [x] Tara（`goodseedsinmind1111-web`）已成為協作者，權限 write
+- [x] GitHub OAuth App 已建立，憑證存於 Netlify 環境變數
+- [x] Netlify 已連結 GitHub，網站可公開瀏覽
+- [x] 登入端點已可正常導向 GitHub 授權頁
+- [x] 推送 GitHub 後會自動建置上線（實測約一分鐘內）
+
+### 待完成
+- [ ] 以 GitHub 帳號實際登入 `/admin`
+- [ ] 生命故事：新增、上傳兩張照片、發布
+- [ ] 觀音三會：修改日期並確認前台更新
+- [ ] 法師開示：修改內容與顯示順序
+- [ ] 確認發布會產生 GitHub Commit 並自動部署
+- [ ] 撰寫給管理人員的簡易操作說明
+
+### 設定注意事項
+- 環境變數名稱必須是 `GITHUB_CLIENT_ID` 與 `GITHUB_CLIENT_SECRET`，Scopes 選 All scopes。
+- `GITHUB_CLIENT_SECRET` 須勾選 **Contains secret values**。
+- Key 欄位永遠填固定英文名稱，Value 才填 GitHub 給的值，兩者不可互換。
+- 換網域時，必須同步更新 OAuth App 的 Homepage URL 與 Authorization callback URL。
+
 ## ⚠️ 緊急問題 (2026-04-29) - ✅ 已完全解決
 - [x] **伺服器當機與檔案遺失問題**
   - ✅ 已從 GitHub 恢復專案
