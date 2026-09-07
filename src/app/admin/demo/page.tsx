@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { DecapAdmin } from "@/components/admin/decap-admin";
 
 export const metadata: Metadata = {
-  title: "朝山網站內容管理",
+  title: "內容管理操作示範",
   robots: { index: false, follow: false },
 };
 
-export default function ContentAdminPage() {
+export default function ContentAdminDemoPage() {
   return (
     <main>
-      <noscript>內容管理後台需要啟用 JavaScript。</noscript>
-      <DecapAdmin />
+      <noscript>操作示範需要啟用 JavaScript。</noscript>
+      <DecapAdmin demo />
     </main>
   );
 }

@@ -3,6 +3,8 @@ backend:
   repo: 093ljm/pilgrimage-journey
   branch: main
   squash_merges: true
+  # base_url 會由 /admin 頁面自動帶入目前網址，換網域也不需要改這裡
+  auth_endpoint: .netlify/functions/auth
 
 local_backend: true
 locale: zh_Hant
