@@ -22,8 +22,12 @@ export default async (request) => {
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
   if (!clientId || !clientSecret) {
+    const missing = [
+      !clientId ? "GITHUB_CLIENT_ID" : null,
+      !clientSecret ? "GITHUB_CLIENT_SECRET" : null,
+    ].filter(Boolean);
     return errorPage(
-      "尚未設定 GITHUB_CLIENT_ID 與 GITHUB_CLIENT_SECRET。請在 Netlify 網站設定的環境變數中加入後重新部署。",
+      `尚未讀取到環境變數：${missing.join("、")}。請確認 Netlify 環境變數的名稱完全一致、Scopes 選擇 All scopes（必須包含 Functions），並在儲存後重新部署。`,
     );
   }
 
