@@ -29,14 +29,42 @@
 - [x] Netlify 已連結 GitHub，網站可公開瀏覽
 - [x] 登入端點已可正常導向 GitHub 授權頁
 - [x] 推送 GitHub 後會自動建置上線（實測約一分鐘內）
+- [x] 以 GitHub 帳號實際登入 `/admin`
+- [x] 生命故事：新增、上傳兩張照片、發布
+- [x] 確認發布會產生 GitHub Commit 並自動部署
+- [x] **修正 YouTube 影片無法顯示（2026-09-07）** — 見下方「影片播放」
 
 ### 待完成
-- [ ] 以 GitHub 帳號實際登入 `/admin`
-- [ ] 生命故事：新增、上傳兩張照片、發布
 - [ ] 觀音三會：修改日期並確認前台更新
 - [ ] 法師開示：修改內容與顯示順序
-- [ ] 確認發布會產生 GitHub Commit 並自動部署
+- [ ] 刪除測試文章（後台 → 生命故事 → 測試文章，稍後刪除 → 刪除）
 - [ ] 撰寫給管理人員的簡易操作說明
+
+### 🎬 影片播放（2026-09-07 修正，★ 不要改回去）
+**問題**：後台貼了 YouTube 連結，前台卻看不到影片。
+
+**原因有兩個：**
+1. 原本嵌入用 `youtube-nocookie.com`。此網域雖然較保護隱私，
+   但部分公司、學校與電信 DNS 會直接擋掉 → 畫面變成一片空白。
+2. 網址解析太嚴格，只認 `watch`、`youtu.be`、`shorts`、`embed`，
+   `/live/`、多一撇的 `/watch/`、`music.youtube.com` 都會失敗。
+
+**做法：**
+- 改用標準 `www.youtube.com/embed/`（相容性最好）。
+- 解析改寫在 `src/lib/life-stories.ts` 的 `getYouTubeId()`，
+  watch／youtu.be／shorts／live／embed／v／music／nocookie／純影片代號 全部支援。
+- 新增 `src/components/ui/video-embed.tsx`：
+  **先顯示封面圖與播放鍵，點擊才載入播放器**。
+  好處：一進頁面不會下載 YouTube 播放器（省流量），
+  而且底下永遠有「在 YouTube 觀看」連結 —— 就算內嵌被擋，影片一定看得到。
+
+### 🈚 中文檔名（2026-09-07 修正）
+後台上傳了 `登入頁面01-xxx.jpg`，導致伺服器持續噴
+`TypeError: Cannot convert argument to a ByteString`。
+- 前台：`safeMediaPath()` 統一把路徑編碼，舊檔案照樣顯示。
+- 後台：`config.yml` 加上 `slug: { encoding: ascii }`，
+  之後上傳的檔案會自動去掉中文字元。
+- ★ 仍建議上傳前自己把檔名改成英文或數字，例如 `story-01.jpg`。
 
 ### 設定注意事項
 - 環境變數名稱必須是 `GITHUB_CLIENT_ID` 與 `GITHUB_CLIENT_SECRET`，Scopes 選 All scopes。

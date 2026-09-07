@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { YouTubeEmbed } from "@/components/ui/video-embed";
 import {
   getPublishedStories,
   getPublishedStory,
-  getYouTubeEmbedUrl,
+  getYouTubeId,
+  safeMediaPath,
   storyImages,
 } from "@/lib/life-stories";
 
@@ -30,8 +32,9 @@ export default async function LifeStoryDetailPage({ params }: PageProps) {
   const story = await getPublishedStory(slug);
   if (!story) notFound();
   const images = storyImages(story);
-  const videoUrl = story.videoUrl;
-  const youtubeEmbed = getYouTubeEmbedUrl(videoUrl);
+  const videoUrl = story.videoUrl.trim();
+  const youtubeId = getYouTubeId(videoUrl);
+  const videoFile = safeMediaPath(story.videoFile);
 
   // 文章夠長時把第二張照片插在段落之間；太短則放在內文之後，避免照片被略過
   const inlineImageIndex = story.body.length >= 3 ? 1 : -1;
@@ -64,16 +67,21 @@ export default async function LifeStoryDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        {(youtubeEmbed || story.videoFile || videoUrl) && (
-          <section className="mt-10 overflow-hidden rounded-3xl bg-stone-900 shadow-xl">
-            {youtubeEmbed ? (
-              <div className="relative aspect-video">
-                <iframe src={youtubeEmbed} title={`${story.title}影片`} loading="lazy" className="absolute inset-0 h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+        {(youtubeId || videoFile || videoUrl) && (
+          <section className="mt-10">
+            {youtubeId ? (
+              <YouTubeEmbed videoId={youtubeId} title={`${story.title}影片`} />
+            ) : videoFile ? (
+              <div className="overflow-hidden rounded-3xl bg-stone-900 shadow-xl">
+                <video controls preload="metadata" playsInline poster={images[0]} className="max-h-[75vh] w-full bg-black">
+                  <source src={videoFile} type="video/mp4" />
+                  您的瀏覽器不支援影片播放。
+                </video>
               </div>
-            ) : story.videoFile ? (
-              <video controls preload="metadata" playsInline poster={images[0]} className="max-h-[75vh] w-full bg-black"><source src={story.videoFile} type="video/mp4" />您的瀏覽器不支援影片播放。</video>
             ) : (
-              <div className="p-10 text-center"><a href={videoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-full bg-amber-500 px-7 py-3 font-medium text-stone-950 hover:bg-amber-400">在新分頁觀看影片</a></div>
+              <div className="overflow-hidden rounded-3xl bg-stone-900 p-10 text-center shadow-xl">
+                <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-full bg-amber-500 px-7 py-3 font-medium text-stone-950 transition-colors hover:bg-amber-400">在新分頁觀看影片</a>
+              </div>
             )}
           </section>
         )}
