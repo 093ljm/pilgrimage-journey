@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
-import { FloatingNav } from "@/components/ui/floating-nav";
+import { SiteChrome } from "@/components/ui/site-chrome";
 
 const inter = Inter({ subsets: ["latin"] });
 const notoSerifTC = Noto_Serif_TC({
@@ -25,8 +25,8 @@ export default function RootLayout({
   return (
     <html lang="zh-TW" className={`${notoSerifTC.variable}`} suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
-        {/* 懸浮膠囊式導航 */}
-        <FloatingNav />
+        {/* 懸浮膠囊式導航（管理後台不顯示） */}
+        <SiteChrome />
 
         <div className="flex min-h-screen flex-col">
           {children}
