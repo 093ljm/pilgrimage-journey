@@ -33,6 +33,9 @@ export default async function LifeStoryDetailPage({ params }: PageProps) {
   const videoUrl = story.videoUrl;
   const youtubeEmbed = getYouTubeEmbedUrl(videoUrl);
 
+  // 文章夠長時把第二張照片插在段落之間；太短則放在內文之後，避免照片被略過
+  const inlineImageIndex = story.body.length >= 3 ? 1 : -1;
+
   return (
     <main className="relative min-h-screen">
       <div className="fixed inset-0 -z-10 bg-gradient-to-b from-amber-100 via-amber-200 to-amber-500" />
@@ -54,9 +57,10 @@ export default async function LifeStoryDetailPage({ params }: PageProps) {
                 {section.paragraphs.map((paragraph, paragraphIndex) => (
                   <p key={`${sectionIndex}-${paragraphIndex}`} className="mb-5 text-base leading-loose text-stone-700 last:mb-0 md:text-lg" style={{ letterSpacing: "0.02em" }}>{paragraph}</p>
                 ))}
-                {sectionIndex === 1 && images[1] && <img src={images[1]} alt={`${story.name}生命故事內文照片`} loading="lazy" className="my-9 aspect-[4/3] w-full rounded-2xl object-cover shadow-md" />}
+                {sectionIndex === inlineImageIndex && images[1] && <img src={images[1]} alt={`${story.name}生命故事內文照片`} loading="lazy" className="my-9 aspect-[4/3] w-full rounded-2xl object-cover shadow-md" />}
               </section>
             ))}
+            {inlineImageIndex === -1 && images[1] && <img src={images[1]} alt={`${story.name}生命故事內文照片`} loading="lazy" className="mt-9 aspect-[4/3] w-full rounded-2xl object-cover shadow-md" />}
           </div>
         </div>
 
