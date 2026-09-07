@@ -44,7 +44,25 @@ timeout 90 git push origin main
 > 只要 `.git` 是完好的（`git status` 正常、`git remote -v` 看得到 origin），
 > 正常推送就會成功，**不需要**砍掉重練，也能保留完整 commit 歷史。
 
-**🔧 備援方案（只有在 `.git` 真的壞掉時才用）**
+**🥇 更好的修復方式（2026-09-07 實測成功，優先於下方 force push）**
+症狀：`.git` 變成空目錄，但專案檔案都在。
+與其砍掉重練，不如**把遠端的 Git 歷史搬回來**，這樣 commit 記錄一筆都不會少：
+```bash
+cd /home/project
+rm -rf /tmp/pj-git
+git clone --quiet --no-checkout https://github.com/093ljm/pilgrimage-journey.git /tmp/pj-git
+cd pilgrimage-journey
+rm -rf .git && mv /tmp/pj-git/.git .git
+git config user.email "noreply@same.new"
+git config user.name "Same AI"
+git reset            # ★ 一定要，否則檔案會全被當成已刪除
+git status --short   # 只會看到你這次真正改過的檔案
+git add -A && git commit -q -m "描述更改（單行）"
+timeout 120 git push origin main
+```
+> 只有在遠端也拿不到時，才退而使用下方的 force push。
+
+**🔧 備援方案（只有在 `.git` 真的壞掉、且上面那招也不行時才用）**
 
 症狀：`git status` 出現 `fatal: not a git repository`，或 `.git` 變成空目錄。
 
