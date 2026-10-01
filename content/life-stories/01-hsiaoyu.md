@@ -8,7 +8,7 @@ summary: 27 年前，她跟著朋友上山，只因為聽說「有位法師在�
 coverImage: ""
 contentImage: ""
 videoUrl: ""
-videoFile: /videos/story-hsiaoyu.mp4
+videoFile: ""
 displayOrder: 1
 published: true
 ---

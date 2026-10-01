@@ -8,7 +8,16 @@ backend:
 
 local_backend: true
 locale: zh_Hant
-publish_mode: simple
+# ============================================================
+# 草稿模式（editorial_workflow）
+# ★ 為了省 Netlify 額度（免費方案每月 300 點，每次正式部署扣 15 點）：
+#   - 按「儲存」＝存成草稿，放在 GitHub 的草稿分支，不會部署、不扣點。
+#     要改幾次都可以。
+#   - 只有按「發布」才會合併回 main，觸發一次正式部署（15 點）。
+#   - 上方「工作流程」分頁可以看到所有草稿：草稿 → 審核中 → 準備發布。
+#   ※ 不要改回 simple，simple 模式每按一次儲存就部署一次。
+# ============================================================
+publish_mode: editorial_workflow
 media_folder: public/images/uploads
 public_folder: /images/uploads
 

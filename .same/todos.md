@@ -15,8 +15,20 @@ Decap 3.8.3 會優先使用既有的 `nc-root`（已查原始碼確認），後�
 - 九月 21 個 commit 全觸發部署 ≈ 315 點，其中 6 個只改筆記、2 個只刪媒體庫照片。
 - 已加 `netlify.toml` 的 `ignore`：只改 `.same/`、`README.md`、`public/images/uploads/` 時略過建置（已用歷史 commit 測過）。
 - ★ AI 規則：程式修改**整批推送、一次部署**，不要改一點推一次；只改筆記的 commit 已不會觸發部署。
-- `public/videos/story-hsiaoyu.mp4` 有 39.7MB，看完一次約 0.8 點；流量變大時建議改放 YouTube。
-- 待用戶決定：等額度重置／升級 Personal（US$9，1000 點）／搬到不按部署次數計費的平台。
+- 計費週期 **9/7～10/6**，目前只剩 30 點寬限額度（僅維持網站上線，不能部署）。
+- **10/7 額度重置後**：到 Netlify Deploys 按 Trigger deploy → Deploy site 一次（15 點），以下修正才會上線。
+- 用戶決定：**先不部署**，等重置。
+
+### ✅ 2026-10-01 已完成（尚未部署，等 10/7）
+- **後台改草稿模式**：`config.yml` 的 `publish_mode: editorial_workflow`。
+  儲存＝草稿（GitHub 分支 `cms/...` + PR，不部署）；狀態改「預備發布」→ 發布＝合併回 main（部署一次）。
+  已用 `/admin/demo` 實測：儲存後狀態「草稿」、作業流程看板出現、已發布列表沒有；
+  改「預備發布」→「立即發布」後進入已發布列表、看板清空。
+  ※ 草稿 PR 會產生 Netlify Deploy Preview，官方文件：預覽部署 0 點。
+- **筱喻師姐影片下架**：`01-hsiaoyu.md` 的 `videoFile` 清空，刪除 `public/videos/story-hsiaoyu.mp4`（39.7MB）。
+  要還原：`git checkout <本次 commit>^ -- public/videos/story-hsiaoyu.mp4`，再把 videoFile 填回。
+  ⚠️ 正式網站要等部署後才會真的下架（目前線上仍可播放）。
+- 本機瀏覽器測試方法：apt-get download 解壓到 `/tmp/chromedeps/root`，用 LD_LIBRARY_PATH 啟動 playwright chromium（無 sudo 也可用）。
 - 本地 `.git` 曾經是空的（環境還原造成），已從 GitHub 重新取回並同步
 
 **生命故事調查結果**：正式網站列表有測試文章，`/events/stories/test-story` 回傳 200。
