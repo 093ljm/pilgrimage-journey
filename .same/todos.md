@@ -7,7 +7,16 @@
 **修正**：`decap-admin.tsx` 直接輸出 `<div id="nc-root" />`，
 Decap 3.8.3 會優先使用既有的 `nc-root`（已查原始碼確認），後台從頁面頂端開始。
 - [x] commit `c14b8d0` 已推送，本地 `bun run build` 成功，建置結果含 `nc-root`
-- [ ] ⚠️ Netlify 推送後 10 分鐘以上**沒有自動建置**（線上仍為 9/10 版本）→ 請用戶到 Netlify Deploys 頁查看
+- [ ] ⚠️ Netlify 沒有部署 → 原因是 **Skipped due to account credit usage exceeded**（額度用完）
+
+### 💳 Netlify 額度（★ 重要，給未來的 AI）
+- 免費方案每月 300 點，**硬上限**；用完後所有正式部署被跳過，嚴重時整站顯示 `Site not available`。
+- 正式部署 15 點／次；預覽部署 0 點；失敗的部署不扣點；流量 20 點／GB；請求 2 點／萬次。
+- 九月 21 個 commit 全觸發部署 ≈ 315 點，其中 6 個只改筆記、2 個只刪媒體庫照片。
+- 已加 `netlify.toml` 的 `ignore`：只改 `.same/`、`README.md`、`public/images/uploads/` 時略過建置（已用歷史 commit 測過）。
+- ★ AI 規則：程式修改**整批推送、一次部署**，不要改一點推一次；只改筆記的 commit 已不會觸發部署。
+- `public/videos/story-hsiaoyu.mp4` 有 39.7MB，看完一次約 0.8 點；流量變大時建議改放 YouTube。
+- 待用戶決定：等額度重置／升級 Personal（US$9，1000 點）／搬到不按部署次數計費的平台。
 - 本地 `.git` 曾經是空的（環境還原造成），已從 GitHub 重新取回並同步
 
 **生命故事調查結果**：正式網站列表有測試文章，`/events/stories/test-story` 回傳 200。

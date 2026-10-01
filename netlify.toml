@@ -4,6 +4,17 @@
 [build]
   command = "bun run build"
   publish = ".next"
+  # ============================================================
+  # 省點數：不影響網站畫面的 commit 不重新建置
+  # ★ Netlify 免費方案每月 300 點，每次正式部署扣 15 點（約 20 次就用完）。
+  #   以下三種變更不會改變網站內容，因此略過建置：
+  #   - .same/（AI 專案筆記）、README.md
+  #   - public/images/uploads/（後台媒體庫單獨上傳或刪除照片）
+  #     照片被文章引用時，發布文章那次就會一併上線，不會漏掉。
+  #   手動按「Trigger deploy」一定會建置；判斷失敗時也一律建置。
+  #   規則：exit 0 = 略過，其他 = 建置
+  # ============================================================
+  ignore = "test \"$CACHED_COMMIT_REF\" != \"$COMMIT_REF\" && git diff --quiet \"$CACHED_COMMIT_REF\" \"$COMMIT_REF\" -- . ':!.same' ':!README.md' ':!public/images/uploads'"
 
 [functions]
   directory = "netlify/functions"
