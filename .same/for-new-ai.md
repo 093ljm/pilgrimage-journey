@@ -1,5 +1,8 @@
 # 🤖 給新 AI 助手的快速指引
 
+> ★★ **先讀 `.same/WORKLOG.md`**：開機檢查、目前狀態、已確定的決策、上架清單都在那裡。
+> 本檔是專案背景資料，部分舊流程已過時，與 WORKLOG 衝突時以 WORKLOG 為準。
+
 **專案**：靈鷲山朝聖之旅網站
 **教團**：Ling Jiou Mountain Buddhist Society（靈鷲山佛教教團）
 **倉庫**：https://github.com/093ljm/pilgrimage-journey
@@ -62,7 +65,11 @@ timeout 120 git push origin main
 ```
 > 只有在遠端也拿不到時，才退而使用下方的 force push。
 
-**🔧 備援方案（只有在 `.git` 真的壞掉、且上面那招也不行時才用）**
+**⛔ 已停用的備援方案（2026-10-01 起禁止使用）**
+
+> 2026-09 起管理員會從後台直接把內容存進 GitHub。下方 force push 會用本地檔案覆蓋遠端，
+> **把管理員發布的文章與照片一起刪掉**。遇到 `.git` 問題一律用上方「把遠端的 Git 歷史搬回來」。
+> 連上方方法也失敗時，停下來告訴用戶，不要自行 force push。以下僅保留作為歷史紀錄。
 
 症狀：`git status` 出現 `fatal: not a git repository`，或 `.git` 變成空目錄。
 

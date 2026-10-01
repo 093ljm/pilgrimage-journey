@@ -39,8 +39,9 @@
 
 **🚨🚨 致命陷阱：force push 會刪掉用戶上傳的圖片 🚨🚨**
 
-本專案的 `.git` 會不定時損壞，修復方式是「重新 init + `git push --force`」。
-force push ＝ **用 AI 本地的檔案完全覆蓋遠端**。
+本專案的 `.git` 會不定時損壞。舊的修復方式是「重新 init + `git push --force`」，
+**2026-10-01 起已禁止**，改用 `WORKLOG.md` 的「從遠端搬回 `.git`」。
+force push ＝ **用 AI 本地的檔案完全覆蓋遠端**（連管理員從後台發布的內容也會被刪掉）。
 
 ```
 用戶推圖到 GitHub  →  AI 沒下載就 force push  →  ❌ 圖片被刪除，且無法復原

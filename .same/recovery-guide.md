@@ -123,9 +123,10 @@ git push
 
 開新對話時，可以直接說：
 
-> "請讀取 `.same/recovery-guide.md` 和 `.same/todos.md`，然後從 GitHub 恢復我的專案並啟動伺服器。
+> "請先讀取 `.same/WORKLOG.md`，照裡面的「開機檢查」做，然後啟動伺服器。"
 >
-> **重要**：推送代碼時可能會遇到權限問題，請重新初始化 Git 並使用 force push。"
+> ⛔ 2026-10-01 起**禁止 force push**：管理員會從後台直接把內容存進 GitHub，
+> force push 會把那些內容一起刪掉。`.git` 遺失時的安全做法見 `WORKLOG.md`。
 
 這樣新的 AI 就能快速了解您的專案並恢復！
 
@@ -141,7 +142,10 @@ git push
 
 ### 解決方案（給 AI 助手）
 
-**方法 1：重新初始化 Git 並 Force Push**
+> ⛔ **已停用（2026-10-01）**：以下 force push 方法會刪掉管理員從後台存進 GitHub 的內容。
+> 請改用 `WORKLOG.md`「開機檢查」裡的「從遠端搬回 `.git`」做法。以下僅保留作為歷史紀錄。
+
+**方法 1（已停用）：重新初始化 Git 並 Force Push**
 ```bash
 cd pilgrimage-journey
 rm -rf .git
