@@ -46,8 +46,11 @@ export function DecapAdmin({ demo = false }: { demo?: boolean }) {
           : { backend: { base_url: window.location.origin } },
       });
     };
-    document.body.appendChild(script);
+        document.body.appendChild(script);
   }, [demo]);
-
-  return null;
+  // ★ 後台畫面上半部空白的修正：
+  //   Decap 預設會把後台加在 <body> 最底部，排在網站外框（至少一個螢幕高）之後，
+  //   因此會被往下推一整個螢幕。這裡先放好 Decap 指定的容器 nc-root，
+  //   Decap 會直接使用它，後台就從頁面最上方開始顯示。
+  return <div id="nc-root" />;
 }
