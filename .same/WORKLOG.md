@@ -103,6 +103,18 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 - [ ] 觀音三會：填入正確日期與報名資訊，並確認前台更新
 - [ ] 法師開示：確認內容與順序
 - [ ] 給管理人員的操作說明（草稿 → 預備發布 → 發布；發布後等 1～2 分鐘）
+- [ ] **GitHub 禁止強制推送**（用戶 10/05 交代：上架前設定）
+      倉庫擁有者 093ljm 在 GitHub 網頁：Settings → Rules → Rulesets → New branch ruleset
+      → Target 選預設分支（main）→ Enforcement: Active → 只勾 **Block force pushes**、**Restrict deletions** → 儲存。
+      ⚠️ **不要勾「Require a pull request」**：後台刪除文章、AI 正常推送都是直接寫入 main，會被擋下。
+      ⚠️ 只有**公開倉庫**能免費設定（私人倉庫要 GitHub Pro／Team），和下方「倉庫是否改不公開」互相牽動。
+- [ ] **正式網址**（用戶 10/05 詢問時機；建議 **10/15 前提供，10/20 前切換完成**）
+      1. 教團提供網域，建議用子網域（例：`xxx.ljm.org.tw`），並找到能改 DNS 的資訊單位
+      2. 資訊單位加一筆 CNAME → `frolicking-begonia-5ec310.netlify.app`（DNS 生效最多 24～48 小時）
+      3. Netlify → Domain management 加自訂網域，HTTPS 憑證自動免費發放
+      4. GitHub OAuth App 的 Homepage URL、Authorization callback URL 改成新網址（只能填一個網址，改完舊網址的後台就無法登入）
+      5. 新網址實測：前台、後台登入、草稿 → 發布；最後的手機實機測試也在新網址做
+      ※ 程式裡沒有寫死網址（已查），後台與登入都自動抓目前網址 → **不用改程式、不用部署、不扣點**
 - [ ] 最後實機測試（手機），重點：速度
 
 ### 待用戶決定：上架必備或上架後再補
@@ -111,6 +123,14 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 - [ ] 筱喻師姐影片改放 YouTube 後貼回連結（站內影片檔已下架）
 - [ ] 093TV 頻道開啟「允許嵌入」，影片才能在站內播放
 - [ ] 照片上傳大小上限（建議 8MB 防呆，**用戶尚未決定，不要自行實作**）
+- [ ] **倉庫要不要改成不公開**（用戶 10/05 詢問，**AI 建議維持公開**，等用戶決定）
+      改不公開的代價（已查官方文件）：
+      ① 上面的「禁止強制推送」免費方案不能設（私人倉庫要 GitHub Pro／Team）
+      ② Netlify 對私人倉庫有 Deploy Request Policy：不是 Netlify 團隊成員的人（例如 Tara、以後接手的管理員）
+         從後台發布時，部署會停在「等待核准」，要 Netlify 帳號擁有者手動核准或把對方加入團隊 → 違反零維護
+      公開的影響：任何人都能看到程式、`.same/` 筆記、後台**草稿**（草稿分支與 PR 是公開的）。
+      倉庫內**沒有密鑰**（已查，OAuth 密鑰在 Netlify 環境變數），網站內容本來就公開。
+      → 唯一要注意：**還不想公開的內容不要先存成草稿**（例如未經當事人同意的生命故事）。
 
 ---
 
