@@ -32,11 +32,11 @@ git fetch -q origin && git status -sb | head -1 # 看本地是否落後遠端（
 
 | 項目 | 狀態 |
 |---|---|
-| 正式網站 | https://frolicking-begonia-5ec310.netlify.app（仍是 **9/10** 的版本） |
+| 正式網站 | https://frolicking-begonia-5ec310.netlify.app（**10/7 已部署最新版** `e5199a4`） |
 | 後台 | `/admin`（GitHub 登入）、`/admin/demo`（示範，不存檔） |
 | GitHub | `093ljm/pilgrimage-journey`，分支 `main`，最新修改**已全部推送** |
-| Netlify 額度 | 計費週期 9/7～10/6，**已用完**，只剩 30 點寬限（維持網站上線，不能部署） |
-| 待上線修改 | 後台空白修正、草稿模式、影片下架、省點設定 → **10/7 後按一次 Trigger deploy** |
+| Netlify 額度 | 10 月週期 10/7～11/6，300 點；10/7 部署一次已用 15 點 |
+| 待上線修改 | 無（後台空白修正、草稿模式、影片下架、省點設定都已上線） |
 | 上架期限 | **2026-11 中旬正式上架**（10/05 用戶調整，原訂 10 月底；時程見「上架清單」） |
 
 ---
@@ -68,6 +68,8 @@ git fetch -q origin && git status -sb | head -1 # 看本地是否落後遠端（
 ### 5. AI 推送規則
 - 程式修改**整批推送**，不要改一點推一次（每次推到 main ＝ 一次正式部署 ＝ 15 點）。
 - 只改 `.same/`、`README.md`、`public/images/uploads/` 的 commit **不會觸發部署**（`netlify.toml` 的 `ignore`），筆記可以放心推。
+  ⚠️ 前提：**上一次成功部署**之後沒有別的網站修改。`ignore` 比對的是「上次成功部署 → 這次」，不是上一個 commit。
+  若之前有部署被跳過或失敗，推筆記也會把累積的網站修改一起建置（10/7 就是這樣自動部署的）。
 - **絕對不要 force push**：管理員會從後台直接存到 GitHub，覆蓋會刪掉他們的內容。
 
 ---
@@ -110,8 +112,8 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   內容多時請**集中幾天發布**，不要一篇改好幾次都按發布。
 
 ### 必須完成
-- [ ] 10/7 額度重置後：Netlify → Deploys → Trigger deploy → Deploy site（一次）
-- [ ] 部署後確認：`/admin` 從頂端顯示、草稿模式出現「作業流程」、筱喻師姐頁無影片
+- [x] 10/7 額度重置後部署一次（推筆記時自動觸發，`e5199a4` Published，50 秒）
+- [x] 部署後確認：config 為 editorial_workflow、`/admin` 含 nc-root 且登入鈕在第一屏中央、影片 404、主要頁面 200
 - [ ] 用正式後台實測一次草稿 → 發布（GitHub backend 的草稿分支／PR 流程）
 - [ ] 刪除「測試文章，稍後刪除」（用草稿模式的後台操作）
 - [ ] 生命故事：除筱喻師姐外的正式文章（等用戶提供）
@@ -156,7 +158,16 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 - 用戶：「點數重置了，後台還是一大片空白」→ 查證正式網站仍是 9/10 版（`publish_mode: simple`、無 `nc-root`、影片仍 200）。
   原因：**點數重置不會自動部署**。最後一個改網站的 commit `4978ea7` 當時因額度被跳過，之後只改筆記（被 `ignore` 略過），所以沒有新部署。
 - 本機用 `bun install --frozen-lockfile && bun run build` 實際建置一次：成功，含 `nc-root`、`editorial_workflow`、無影片檔。
-- 等用戶到 Netlify 按 **Trigger deploy → Deploy site**（15 點）。部署後要驗證：config 為 editorial_workflow、`/admin` 含 nc-root、影片 404。
+- **已自動部署，用戶不必按 Trigger deploy**：我 11:47 推送上面那筆筆記就觸發了正式部署（用戶截圖 `main@e5199a4 Published`）。
+  原因：`ignore` 比對「上次成功部署（9/10）→ 這次」，中間有 10/1 的網站修改，所以判定要建置。這正是需要的那一次，扣 15 點。
+- 驗證通過：`publish_mode: editorial_workflow`、`/admin` 含 nc-root（登入鈕在第一屏中央）、影片 404、主要頁面 200。
+- 環境中途重啟一次：`.git` 變空、本地未推送的筆記修改消失、**`gh` 登入狀態被清掉**（`git push` 可能需要重新授權）。
+  - 授權約一小時後**自己恢復**（用戶確認 MCP Tools 的 GitHub 一直是 Connected）。之後再遇到：先等，或請用戶到 Tools 重新連接。
+  - ★ 觀察（推測，待更多次驗證）：環境重啟後，**用檔案編輯工具（string_replace／edit_file）改的檔案保留下來**，
+    **用終端機（python、sed、heredoc）改的消失了**。Same 官方文件：檔案存檔點（Checkpoint）在「AI 編輯檔案後」建立。
+    → **改筆記、改程式一律用編輯工具，不要用終端機寫檔**；改完立刻推送。
+  - task_agent 的 GitHub 整合目前會出錯（`github_add_comment_to_pending_review` schema 錯誤），推送請直接用終端機 `git push`。
+- 下一步：用戶從正式後台測試法師開示、觀音三會（草稿 → 預備發布 → 發布）。
 
 ### 2026-10-05
 - **開機**：`.git` 又是空目錄 → 從 GitHub 取回；本地沒有未存修改，與遠端一致（`3b5683b`）。開發伺服器只有一個，主要頁面都回 200。
