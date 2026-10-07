@@ -83,6 +83,10 @@ git fetch -q origin && git status -sb | head -1 # 看本地是否落後遠端（
 | 後台登入、發布流程等用戶不易判斷的 | **先問用戶**，同意才做畫面檢查 | — |
 - 不主動截圖、不開無頭瀏覽器、不做完整建置、不建立版本截圖（Same 會自動存檔），除非用戶要求。
 - 改檔案**一律用編輯工具**（string_replace／edit_file），環境重啟後才會保留；不要用終端機寫檔。
+- ★ **官方證實**（docs.same.new/essentials/manual-editing）：「The terminal is containerized and operations performed
+  within the terminal are **reset on page refresh**.」→ 這就是 `.git` 老是變空、終端機改的檔案消失的原因。
+  因此：在終端機 commit 後要**立刻 push**（推上 GitHub 才安全）；請用戶檢查畫面時用**預覽面板自己的重新整理鈕**，
+  AI 還有沒推送的東西時，不要重新整理整個 Same 頁面。
 - 預覽畫面看起來卡住：多半是重啟後第一次編譯（1～2 分鐘）。超過 3 分鐘才重啟開發伺服器，一個指令就好。
 
 ---
