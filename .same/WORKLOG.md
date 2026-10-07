@@ -151,6 +151,13 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 
 ## 📓 工作日誌（新的寫在最上面）
 
+### 2026-10-07
+- 開機：`.git` 又空 → 從 GitHub 取回，與遠端一致（`a8c75de`）。
+- 用戶：「點數重置了，後台還是一大片空白」→ 查證正式網站仍是 9/10 版（`publish_mode: simple`、無 `nc-root`、影片仍 200）。
+  原因：**點數重置不會自動部署**。最後一個改網站的 commit `4978ea7` 當時因額度被跳過，之後只改筆記（被 `ignore` 略過），所以沒有新部署。
+- 本機用 `bun install --frozen-lockfile && bun run build` 實際建置一次：成功，含 `nc-root`、`editorial_workflow`、無影片檔。
+- 等用戶到 Netlify 按 **Trigger deploy → Deploy site**（15 點）。部署後要驗證：config 為 editorial_workflow、`/admin` 含 nc-root、影片 404。
+
 ### 2026-10-05
 - **開機**：`.git` 又是空目錄 → 從 GitHub 取回；本地沒有未存修改，與遠端一致（`3b5683b`）。開發伺服器只有一個，主要頁面都回 200。
 - **查後台測試狀態**（看 GitHub 提交紀錄）：
