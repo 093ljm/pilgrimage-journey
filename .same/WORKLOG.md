@@ -196,6 +196,20 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 
 ## 📓 工作日誌（新的寫在最上面）
 
+### 2026-10-15（討論中，尚未實作）
+- 開機：整個專案資料夾不見 → 從 GitHub 重新 clone ＋ `bun install`；之後 `.git` 又空一次，已搬回。
+- **用戶提案：網站內建報名表單**（不用 Google 表單），名單在後台查看與下載。已查證：
+  - Netlify Forms：點數方案**免費、不限筆數**（官方 2026-04 起）；上線只需部署一次 15 點。
+  - 新版 Next.js 需在 `public/__forms.html` 放隱藏表單供偵測，頁面再用 fetch POST 到 `/__forms.html`（opennext.js.org/netlify/forms）。
+  - 上線前用戶需到 Netlify → Forms 開啟表單偵測。
+  - ❌ Decap 沒有 `show_forms` 設定（查原始碼 configSchema）；3.8.3 也**沒有** `registerAdditionalLink`，無法在 Decap 內加自訂頁。
+  - ✅ 可行做法：另做 `/admin/registrations` 頁，讀瀏覽器 `localStorage["decap-cms-user"]` 的 GitHub token（沿用後台登入）
+    → Netlify Function 用 token 向 GitHub 確認此人對倉庫有寫入權限 → 再用 Netlify 個人存取權杖（環境變數）讀報名資料，回傳名單與 CSV。
+  - ❌ 寄副本給信眾：Netlify 只通知管理者；Decap 只是編輯器，也無法寄信。要寄需另接寄信服務且有被濫用寄信的風險 → **用戶同意不做**。
+  - **統一收件信箱：LJMMKT@ljm.org.tw**（Netlify Forms Email 通知）。通知信寄件者 formresponses@netlify.com，請教團 IT 加白名單。
+  - ⚠️ 報名資料**絕不可存進 GitHub**（公開倉庫）。
+- 待用戶回覆：報名哪一類（觀音三會／個人朝山／團體）、是否已有官方報名系統、個資告知聲明文字、欄位。
+
 ### 2026-10-07
 - 開機：`.git` 又空 → 從 GitHub 取回，與遠端一致（`a8c75de`）。
 - 用戶：「點數重置了，後台還是一大片空白」→ 查證正式網站仍是 9/10 版（`publish_mode: simple`、無 `nc-root`、影片仍 200）。
