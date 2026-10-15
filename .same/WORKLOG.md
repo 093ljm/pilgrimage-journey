@@ -208,7 +208,24 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   - ❌ 寄副本給信眾：Netlify 只通知管理者；Decap 只是編輯器，也無法寄信。要寄需另接寄信服務且有被濫用寄信的風險 → **用戶同意不做**。
   - **統一收件信箱：LJMMKT@ljm.org.tw**（Netlify Forms Email 通知）。通知信寄件者 formresponses@netlify.com，請教團 IT 加白名單。
   - ⚠️ 報名資料**絕不可存進 GitHub**（公開倉庫）。
-- 待用戶回覆：報名哪一類（觀音三會／個人朝山／團體）、是否已有官方報名系統、個資告知聲明文字、欄位。
+- 用戶決定：做「報名表單＋後台報名名單」；不寄副本；**不加個資同意勾選**（怕長輩不想填），只放一行用途說明；
+  欄位＝姓名、手機、Email（選填）、朝山日期、路線（三選一）、人數、備註。報名類型、官方系統、個資聲明**先保留**（用戶整理中）。
+- ⚠️ 用戶把 Netlify 個人存取權杖**貼在對話裡** → AI 未使用、未寫入任何檔案，已建議撤銷並換新一把，直接貼進 Netlify 環境變數。
+- **已實作（尚未推送，等用戶看預覽確認）**：
+  - `public/__forms.html`：給 Netlify 偵測的隱藏表單 `pilgrimage-registration`（欄位名稱需與表單一致）
+  - `src/app/register/page.tsx`＋`src/components/registration-form.tsx`：報名頁 `/register`；電話讀觀音三會設定；
+    開發模式只模擬送出；通知信主旨 `【朝山報名】姓名｜日期｜路線｜人數`；防機器人欄位 `bot-field`
+  - `netlify/functions/registrations.mjs`：用 GitHub 權杖確認對倉庫有寫入權限 → 用環境變數 `NETLIFY_FORMS_TOKEN` 讀報名資料
+  - `src/app/admin/registrations/page.tsx`＋`src/components/admin/registrations-list.tsx`：名單頁（搜尋、依朝山日期排序、
+    下載含 BOM 的 CSV，Excel 中文不亂碼）；開發模式顯示示範資料
+  - `decap-admin.tsx`：後台左下角「報名名單」按鈕（示範後台不顯示）
+  - `floating-nav.tsx`：「立即報名」從無效的 `#contact` 改連 `/register`
+- **上線順序（不可顛倒，否則要多部署一次）**：
+  1. 用戶：Netlify → Forms → 開啟表單偵測（Enable form detection）
+  2. 用戶：產生新的存取權杖（永不過期）→ 環境變數 `NETLIFY_FORMS_TOKEN`（勾 Contains secret values）
+  3. AI：推送（部署一次 15 點）→ 部署時偵測到表單、函式讀到權杖
+  4. 用戶：Netlify → Forms → 表單通知 → Email → `LJMMKT@ljm.org.tw`
+  5. 用戶：正式網站送一筆測試報名 → 確認信箱收到、`/admin/registrations` 看得到 → 在 Netlify 刪除測試資料
 
 ### 2026-10-07
 - 開機：`.git` 又空 → 從 GitHub 取回，與遠端一致（`a8c75de`）。
