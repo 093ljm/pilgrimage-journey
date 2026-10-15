@@ -233,6 +233,10 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   - ✅ 步驟 3 推送：GitHub 授權失效、task_agent 的 GitHub 工具報 schema 錯誤（MCP Tools 面板只是名稱清單，**無法取消勾選**）
     → 改用 `gh auth login --web` 裝置代碼：用戶到 github.com/login/device 輸入代碼（會先要求 Verify via email）→ 授權成功
     → `gh auth setup-git` 後推送。★ 授權失效時這是最快的解法（約 1 分鐘）。
+  - ✅ 已部署 `d2be396`（10 月第 3 次部署，累計 45 點）。正式網站驗證：
+    `/register`、`/__forms.html`、`/admin/registrations` 皆 200；函式未登入 401、用 093ljm 的 GitHub 權杖 200
+    `{"formFound":true,"submissions":[]}`；Netlify 已偵測表單 `pilgrimage-registration`（9 個欄位）。
+  - ⏳ 待用戶：正式網站送一筆測試報名 → LJMMKT 收信（可能在垃圾郵件匣）→ 後台「報名名單」看得到 → Netlify Forms 刪除測試資料。
   - 免費方案 API 眉角：指定 scopes 會 403「Upgrade to set specific scopes」；不指定則機密變數會 422
     「Secrets are not allowed in post_processing」→ 只能用 `["builds","functions","runtime"]`（與網頁介面相同）。
   - Netlify 資訊：site_id `710de8ac-a67e-456d-93bc-844ea79c914e`、帳號 `093-marketing`（Free，Owner）。
