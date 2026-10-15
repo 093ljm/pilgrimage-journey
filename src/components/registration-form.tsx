@@ -16,12 +16,6 @@ import { type FormEvent, useEffect, useState } from "react";
 
 const FORM_NAME = "pilgrimage-registration";
 
-const ROUTES = [
-  { value: "四公里路線（濱海公路 → 多羅觀音）", title: "四公里路線", desc: "濱海公路 → 多羅觀音" },
-  { value: "一公里路線（地藏廣場 → 多羅觀音）", title: "一公里路線", desc: "地藏廣場 → 多羅觀音" },
-  { value: "體驗路線（天眼門 → 多羅觀音）", title: "體驗路線", desc: "天眼門 → 多羅觀音" },
-];
-
 const inputClass =
   "w-full rounded-2xl border border-amber-200 bg-white px-5 py-4 text-lg text-stone-800 placeholder:text-stone-400 transition focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-200/60";
 
@@ -41,7 +35,6 @@ export function RegistrationForm({ phone, phoneExt }: { phone: string; phoneExt:
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
-  const [route, setRoute] = useState("");
   const [people, setPeople] = useState(1);
   const [note, setNote] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -62,7 +55,6 @@ export function RegistrationForm({ phone, phoneExt }: { phone: string; phoneExt:
     setMobile("");
     setEmail("");
     setDate("");
-    setRoute("");
     setPeople(1);
     setNote("");
   };
@@ -78,9 +70,8 @@ export function RegistrationForm({ phone, phoneExt }: { phone: string; phoneExt:
       return;
     }
 
-    const routeTitle = ROUTES.find((r) => r.value === route)?.title ?? route;
-    // 通知信主旨：讓教團信箱一眼看出是誰、哪天、哪條路線
-    formData.set("subject", `【朝山報名】${name}｜${date}｜${routeTitle}｜${people} 人`);
+    // 通知信主旨：讓教團信箱一眼看出是誰、哪天、幾個人
+    formData.set("subject", `【朝山報名】${name}｜${date}｜${people} 人`);
 
     setStatus("sending");
     try {
@@ -215,40 +206,6 @@ export function RegistrationForm({ phone, phoneExt }: { phone: string; phoneExt:
               </button>
             </div>
           </div>
-
-          <fieldset className="md:col-span-2">
-            <legend className="mb-2 flex items-baseline gap-2 font-serif text-lg font-bold text-amber-900">
-              路線
-              <span className="text-sm font-normal text-amber-700/80">必填</span>
-            </legend>
-            <div className="grid gap-3 md:grid-cols-3">
-              {ROUTES.map((option) => {
-                const checked = route === option.value;
-                return (
-                  <label
-                    key={option.value}
-                    className={`flex cursor-pointer items-start gap-3 rounded-2xl border-2 p-4 transition ${
-                      checked ? "border-amber-500 bg-amber-50 shadow-md" : "border-amber-100 bg-white hover:border-amber-300"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="route"
-                      value={option.value}
-                      required
-                      checked={checked}
-                      onChange={() => setRoute(option.value)}
-                      className="mt-1 h-5 w-5 shrink-0 accent-amber-600"
-                    />
-                    <span>
-                      <span className="block font-serif text-lg font-bold text-stone-800">{option.title}</span>
-                      <span className="block text-base text-stone-600">{option.desc}</span>
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
-          </fieldset>
 
           <div className="md:col-span-2">
             <FieldLabel htmlFor="reg-note" optional>

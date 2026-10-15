@@ -13,7 +13,7 @@
 
 const REPO = "093ljm/pilgrimage-journey"; // 與 public/admin/config.yml 的 backend.repo 相同
 const FORM_NAME = "pilgrimage-registration"; // 與 public/__forms.html 的 form name 相同
-const FIELDS = ["name", "phone", "email", "date", "route", "people", "note"];
+const FIELDS = ["name", "phone", "email", "date", "people", "note"];
 const MAX_PAGES = 20; // 每頁 100 筆，最多讀 2000 筆
 
 function json(status, body) {

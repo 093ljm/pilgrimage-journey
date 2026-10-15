@@ -29,7 +29,6 @@ const COLUMNS: { key: string; label: string }[] = [
   { key: "phone", label: "手機" },
   { key: "email", label: "Email" },
   { key: "date", label: "朝山日期" },
-  { key: "route", label: "路線" },
   { key: "people", label: "人數" },
   { key: "note", label: "備註" },
 ];
@@ -38,12 +37,12 @@ const DEMO: Submission[] = [
   {
     id: "demo-1",
     createdAt: new Date(Date.now() - 3600_000).toISOString(),
-    data: { name: "王小明（示範）", phone: "0912345678", email: "demo@example.com", date: "2026-10-25", route: "一公里路線（地藏廣場 → 多羅觀音）", people: "2", note: "同行有長輩" },
+    data: { name: "王小明（示範）", phone: "0912345678", email: "demo@example.com", date: "2026-10-25", people: "2", note: "同行有長輩" },
   },
   {
     id: "demo-2",
     createdAt: new Date(Date.now() - 86_400_000).toISOString(),
-    data: { name: "陳美麗（示範）", phone: "0987654321", email: "", date: "2026-11-08", route: "體驗路線（天眼門 → 多羅觀音）", people: "5", note: "" },
+    data: { name: "陳美麗（示範）", phone: "0987654321", email: "", date: "2026-11-08", people: "5", note: "" },
   },
 ];
 
@@ -63,10 +62,6 @@ function formatTime(iso: string): string {
   if (Number.isNaN(d.getTime())) return iso;
   const pad = (n: number) => String(n).padStart(2, "0");
   return `${d.getFullYear()}/${pad(d.getMonth() + 1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
-
-function shortRoute(route: string): string {
-  return route.split("（")[0] || route;
 }
 
 function toCsv(rows: Submission[]): string {
@@ -246,7 +241,7 @@ export function RegistrationsList() {
                     type="search"
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="搜尋姓名、手機、日期、路線…"
+                    placeholder="搜尋姓名、手機、日期…"
                     className="w-full rounded-full border border-stone-200 bg-white px-5 py-3 text-base focus:border-amber-500 focus:outline-none focus:ring-4 focus:ring-amber-200/60 sm:max-w-sm"
                   />
                   <select
@@ -291,9 +286,6 @@ export function RegistrationsList() {
                             )}
                           </td>
                           <td className="whitespace-nowrap px-4 py-3">{row.data.date}</td>
-                          <td className="whitespace-nowrap px-4 py-3" title={row.data.route}>
-                            {shortRoute(row.data.route)}
-                          </td>
                           <td className="px-4 py-3 text-center">{row.data.people}</td>
                           <td className="min-w-[12rem] px-4 py-3 text-stone-600">{row.data.note}</td>
                         </tr>
@@ -311,7 +303,7 @@ export function RegistrationsList() {
                         <p className="text-xs text-stone-400">{formatTime(row.createdAt)}</p>
                       </div>
                       <p className="mt-2 text-base text-stone-700">
-                        {row.data.date}｜{shortRoute(row.data.route)}｜{row.data.people} 人
+                        {row.data.date}｜{row.data.people} 人
                       </p>
                       <p className="mt-1 text-base">
                         <a href={`tel:${row.data.phone}`} className="text-amber-800">

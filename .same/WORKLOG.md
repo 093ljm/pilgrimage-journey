@@ -49,14 +49,15 @@ gh auth status 2>&1 | head -2                   # 看能不能推送；未登入
 
 ---
 
-## 📌 目前狀態（2026-10-07 收工）
+## 📌 目前狀態（2026-10-15 收工）
 
 | 項目 | 狀態 |
 |---|---|
-| 正式網站 | https://frolicking-begonia-5ec310.netlify.app（10/7 已部署 `83074a3`，含新版常見問題，已用 curl 確認上線） |
-| 後台 | `/admin`（GitHub 登入）、`/admin/demo`（示範，不存檔） |
+| 正式網站 | https://frolicking-begonia-5ec310.netlify.app（10/15 部署：報名表單已上線，並移除「路線」欄位） |
+| 後台 | `/admin`（GitHub 登入）、`/admin/demo`（示範，不存檔）、`/admin/registrations`（報名名單，後台左下角按鈕） |
+| 報名 | `/register` → Netlify Forms `pilgrimage-registration` → Email 通知 `LJMMKT@ljm.org.tw`；用戶測試全部通過 |
 | GitHub | `093ljm/pilgrimage-journey`，分支 `main`，最新修改**已全部推送** |
-| Netlify 額度 | 10 月週期 10/7～11/6，300 點；已部署 2 次，**用 30 點，剩約 270 點** |
+| Netlify 額度 | 10 月週期 10/7～11/6，300 點；已部署 4 次，**用 60 點，剩約 240 點**（表單送出本身免費） |
 | 待上線修改 | 無 |
 | 用戶下一步 | **彙整可上傳的資料**（生命故事、觀音三會日期、法師開示等），之後從正式後台測試＋發布 |
 | 上架期限 | **2026-11 中旬正式上架**（10/05 用戶調整，原訂 10 月底；時程見「上架清單」） |
@@ -236,7 +237,11 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   - ✅ 已部署 `d2be396`（10 月第 3 次部署，累計 45 點）。正式網站驗證：
     `/register`、`/__forms.html`、`/admin/registrations` 皆 200；函式未登入 401、用 093ljm 的 GitHub 權杖 200
     `{"formFound":true,"submissions":[]}`；Netlify 已偵測表單 `pilgrimage-registration`（9 個欄位）。
-  - ⏳ 待用戶：正式網站送一筆測試報名 → LJMMKT 收信（可能在垃圾郵件匣）→ 後台「報名名單」看得到 → Netlify Forms 刪除測試資料。
+  - ✅ 用戶測試報名**全部通過**：LJMMKT 收到通知、後台「報名名單」顯示正常（用戶：「後台也非常棒」）。
+- **移除「路線」欄位**（用戶：事前選擇對信眾太難，路線之後也可能變動）：報名表單、`__forms.html`、
+  函式 `FIELDS`、後台名單（欄位、示範資料、搜尋提示、手機版卡片）、通知信主旨（改為 `【朝山報名】姓名｜日期｜人數`）都已同步移除。
+  目前欄位：姓名、手機、Email（選填）、朝山日期、人數、備註。與工作日誌一起推送 → 部署一次（10 月第 4 次，累計 60 點）。
+- **收工。** 用戶接下來彙整其他上架資料；報名類型、是否另有官方系統、個資聲明仍保留待定。
   - 免費方案 API 眉角：指定 scopes 會 403「Upgrade to set specific scopes」；不指定則機密變數會 422
     「Secrets are not allowed in post_processing」→ 只能用 `["builds","functions","runtime"]`（與網頁介面相同）。
   - Netlify 資訊：site_id `710de8ac-a67e-456d-93bc-844ea79c914e`、帳號 `093-marketing`（Free，Owner）。
