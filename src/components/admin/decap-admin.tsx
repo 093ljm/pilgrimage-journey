@@ -52,5 +52,19 @@ export function DecapAdmin({ demo = false }: { demo?: boolean }) {
   //   Decap 預設會把後台加在 <body> 最底部，排在網站外框（至少一個螢幕高）之後，
   //   因此會被往下推一整個螢幕。這裡先放好 Decap 指定的容器 nc-root，
   //   Decap 會直接使用它，後台就從頁面最上方開始顯示。
-  return <div id="nc-root" />;
+  // ★ 「報名名單」按鈕：Decap 3.8.3 不能在側邊欄加自訂頁面，所以放在畫面左下角。
+  //   名單頁沿用這裡的 GitHub 登入（示範模式沒有真實名單，不顯示）。
+  return (
+    <>
+      <div id="nc-root" />
+      {!demo && (
+        <a
+          href="/admin/registrations"
+          className="fixed bottom-5 left-5 z-[200] rounded-full bg-amber-600 px-5 py-3 text-base font-bold text-white shadow-lg transition hover:bg-amber-700"
+        >
+          報名名單
+        </a>
+      )}
+    </>
+  );
 }

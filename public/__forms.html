@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  朝山報名表單 — 給 Netlify 偵測用的隱藏表單（訪客看不到）
+  ------------------------------------------------------------
+  ★ 新版 Next.js 的頁面不會被 Netlify 掃描到，所以在這裡放一份
+    「只有欄位名稱」的表單，讓 Netlify 部署時認得 pilgrimage-registration。
+  ★ 真正的表單在 src/components/registration-form.tsx，
+    兩邊的欄位名稱（name="..."）必須完全一致。新增或改名欄位時兩邊都要改。
+  ★ 報名資料存在 Netlify，不會進 GitHub（倉庫是公開的，個資絕不可放進去）。
+  ============================================================
+-->
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>表單偵測用</title>
+  </head>
+  <body>
+    <form name="pilgrimage-registration" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="pilgrimage-registration" />
+      <input type="hidden" name="subject" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="phone" />
+      <input name="email" />
+      <input name="date" />
+      <input name="route" />
+      <input name="people" />
+      <textarea name="note"></textarea>
+    </form>
+  </body>
+</html>

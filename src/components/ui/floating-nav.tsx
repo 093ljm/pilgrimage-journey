@@ -298,7 +298,7 @@ export function FloatingNav() {
               className="hidden lg:block"
             >
               <Link
-                href="#contact"
+                href="/register"
                 className={`
                   block px-6 py-2 rounded-full font-medium text-base
                   transition-all duration-300
@@ -438,7 +438,7 @@ export function FloatingNav() {
                   ))}
                   <li className="px-6 py-6">
                     <Link
-                      href="#contact"
+                      href="/register"
                       onClick={() => setMobileMenuOpen(false)}
                       className="block text-center px-6 py-3 rounded-full font-medium bg-amber-600 text-white hover:bg-amber-700 transition-all duration-300 shadow-md"
                     >

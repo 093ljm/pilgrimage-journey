@@ -226,6 +226,16 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   3. AI：推送（部署一次 15 點）→ 部署時偵測到表單、函式讀到權杖
   4. 用戶：Netlify → Forms → 表單通知 → Email → `LJMMKT@ljm.org.tw`
   5. 用戶：正式網站送一筆測試報名 → 確認信箱收到、`/admin/registrations` 看得到 → 在 Netlify 刪除測試資料
+- **用戶決定不換權杖**，請 AI 直接設定 → AI 用 Netlify API 完成（權杖只用在 API 呼叫，未寫入任何檔案）：
+  - ✅ 步驟 1：表單偵測已開啟（site `processing_settings.ignore_html_forms: false`）
+  - ✅ 步驟 2：環境變數 `NETLIFY_FORMS_TOKEN`（機密、scopes builds/functions/runtime、只在 production）
+  - ✅ 步驟 4（提前做）：Email 通知 hook `submission_created` → `LJMMKT@ljm.org.tw`
+  - ✅ 步驟 3 推送：GitHub 授權失效、task_agent 的 GitHub 工具報 schema 錯誤（MCP Tools 面板只是名稱清單，**無法取消勾選**）
+    → 改用 `gh auth login --web` 裝置代碼：用戶到 github.com/login/device 輸入代碼（會先要求 Verify via email）→ 授權成功
+    → `gh auth setup-git` 後推送。★ 授權失效時這是最快的解法（約 1 分鐘）。
+  - 免費方案 API 眉角：指定 scopes 會 403「Upgrade to set specific scopes」；不指定則機密變數會 422
+    「Secrets are not allowed in post_processing」→ 只能用 `["builds","functions","runtime"]`（與網頁介面相同）。
+  - Netlify 資訊：site_id `710de8ac-a67e-456d-93bc-844ea79c914e`、帳號 `093-marketing`（Free，Owner）。
 
 ### 2026-10-07
 - 開機：`.git` 又空 → 從 GitHub 取回，與遠端一致（`a8c75de`）。
