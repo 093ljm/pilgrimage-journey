@@ -32,7 +32,7 @@
 cd /home/project/pilgrimage-journey
 git status --short && git log --oneline -3     # 若出現 not a git repository → 走下方「.git 遺失」
 git fetch -q origin && git status -sb | head -1 # 看本地是否落後遠端（管理員會從後台直接改 GitHub）
-gh auth status 2>&1 | head -2                   # 看能不能推送；未登入 → 告訴用戶（通常會自己恢復，或到 Tools 確認 GitHub 是 Connected）
+gh auth status 2>&1 | head -2                   # 看能不能推送；未登入 → 見下方第 5 點（8 碼代碼，約 1 分鐘）
 ```
 
 1. **`.git` 遺失**（空目錄）→ 從遠端搬回歷史，**絕對不要 force push**：
@@ -46,6 +46,13 @@ gh auth status 2>&1 | head -2                   # 看能不能推送；未登入
 3. 開發伺服器：`pkill -f "next dev"` 確認只有一個在跑 → `bun run dev`。
    清快取後首頁第一次編譯約 100 秒，屬正常。
 4. 讀本檔「目前狀態」與「工作日誌」最新一筆，接著做。
+5. **GitHub 無法推送**（`gh auth status` 顯示未登入）→ 背景執行
+   `echo | gh auth login --hostname github.com --git-protocol https --web > /tmp/ghlogin.log 2>&1`，
+   讀出 8 碼代碼給用戶 → 用戶到 https://github.com/login/device 用 **093ljm** 登入、輸入代碼
+   （會先要求 Verify via email）→ 按 Authorize → AI 執行 `gh auth setup-git` 後推送。2026-10-15 驗證有效。
+   ※ MCP Tools 面板無法取消勾選工具；task_agent 的 GitHub 工具目前會報 schema 錯誤，不要靠它推送。
+6. **整個專案資料夾不見**（10/15 發生兩次）→ `git clone` → `bun install` → `bun run dev`。
+   GitHub 上的東西從沒少過，只要事先推送就不會遺失。
 
 ---
 
