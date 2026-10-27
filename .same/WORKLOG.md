@@ -211,6 +211,14 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   沿用 `YouTubeEmbed`（封面點播、未開放嵌入時顯示說明＋前往 YouTube），放在底部分隔裝飾之後。
   `bun run lint` 通過。**尚未推送，等用戶看預覽確認**（推送＝部署一次 15 點）。
 - 途中環境又重啟一次：`.git` 變空、本檔剛改的一處消失（`/dharma` 的修改有保留）→ 補回、搬回 `.git` 後只推送本檔。
+- 用戶：影片一直「載入中」，滑鼠移上去顯示 YouTube 拒絕連線（用戶已開啟允許嵌入）。查證：
+  - 用戶新給的分享連結 `?si=...` 是同一支影片（`si` 只是分享追蹤碼）。
+  - YouTube oEmbed 回 200 → **允許嵌入已生效**；`/embed/` 回應沒有 X-Frame-Options，可被嵌入。
+  - ★ **原因是 Same 預覽代理加了 `Cross-Origin-Embedder-Policy: require-corp`**（另有 `frame-ancestors *`），
+    瀏覽器因此擋掉沒有 COEP 的 YouTube iframe → 「拒絕連線」，播放器 onReady 不會觸發，畫面停在「載入中」。
+    開新分頁看預覽也一樣（標頭在預覽頁本身）。
+  - 正式網站（Netlify）**沒有** COEP 標頭 → 上線後可以正常播放。
+  - ⇒ **YouTube 嵌入無法在 Same 預覽中測試**，只能看版面；能否播放要在正式網站確認。
 
 ### 2026-10-15（討論中，尚未實作）
 - 開機：整個專案資料夾不見 → 從 GitHub 重新 clone ＋ `bun install`；之後 `.git` 又空一次，已搬回。
