@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Note } from "@/components/ui/note";
+import { YouTubeEmbed } from "@/components/ui/video-embed";
 
 export const metadata: Metadata = {
   title: "朝山路線與行儀 - 靈鷲山朝聖之旅",
@@ -233,6 +234,31 @@ export default function RoutesPage() {
               </div>
             </div>
           </article>
+
+          {/* 分隔裝飾 */}
+          <div className="flex justify-center my-16">
+            <div className="w-16 h-16 rounded-full border-2 border-amber-600/30 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full border-2 border-amber-600/50 flex items-center justify-center">
+                <div className="w-4 h-4 rounded-full bg-amber-600/70" />
+              </div>
+            </div>
+          </div>
+
+          {/* 影片：朝山步驟 */}
+          <section aria-labelledby="routes-video-title">
+            <div className="text-center mb-8">
+              <p className="text-amber-700 font-medium tracking-wider mb-2">
+                影片
+              </p>
+              <h2
+                id="routes-video-title"
+                className="font-serif text-3xl md:text-4xl font-bold text-amber-900"
+              >
+                朝山步驟
+              </h2>
+            </div>
+            <YouTubeEmbed videoId="e1piTXh-CiQ" title="朝山步驟" />
+          </section>
         </div>
       </div>
     </main>

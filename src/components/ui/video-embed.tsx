@@ -88,9 +88,22 @@ function loadYouTubeApi(): Promise<YouTubePlayerConstructor> {
 }
 
 type PlayerState = "cover" | "loading" | "playing" | "blocked" | "fallback";
-
+// 點下播放後，超過這個時間播放器仍未就緒，就改顯示說明。
+// ★ 為什麼需要：播放器若被瀏覽器或網路擋下（畫面出現「拒絕連線」），
+//   YouTube 不會回報任何錯誤，畫面會永遠停在「載入中」，信眾會以為網站壞了。
+//   取 12 秒而不是更短，是替手機網路較慢的信眾留一點餘裕。
+const LOAD_TIMEOUT_MS = 12000;
+// 自訂代碼（YouTube 的錯誤代碼都是正數，不會撞號）
+const LOAD_TIMEOUT_CODE = -1;
 // YouTube 播放器的錯誤代碼，轉成信眾看得懂的說明
 function describeError(code: number): { title: string; detail: string } {
+  if (code === LOAD_TIMEOUT_CODE) {
+    return {
+      title: "影片載入失敗",
+      detail:
+        "可能是網路較慢，或目前的網路環境無法在本站播放影片，請前往 YouTube 觀看。",
+    };
+  }
   if (code === 101 || code === 150) {
     return {
       title: "這支影片未開放在其他網站播放",
@@ -144,10 +157,16 @@ export function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
   }, []);
 
   useEffect(() => {
-    if (state !== "loading") return;
-
+        if (state !== "loading") return;
     let cancelled = false;
-
+    // 等太久仍未就緒 → 改顯示說明與前往 YouTube 的按鈕（見 LOAD_TIMEOUT_MS 的說明）。
+    // 播放器就緒或出錯時 state 會改變，下方的清除函式會一併取消這個計時。
+    const loadTimer = window.setTimeout(() => {
+      if (cancelled) return;
+      clearHost();
+      setErrorCode(LOAD_TIMEOUT_CODE);
+      setState("blocked");
+    }, LOAD_TIMEOUT_MS);
     loadYouTubeApi()
       .then((Player) => {
         if (cancelled || !hostRef.current) return;
@@ -193,6 +212,7 @@ export function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
 
     return () => {
       cancelled = true;
+      window.clearTimeout(loadTimer);
     };
   }, [state, videoId, clearHost]);
 

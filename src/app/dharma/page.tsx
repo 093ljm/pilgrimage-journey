@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { YouTubeEmbed } from "@/components/ui/video-embed";
 
 export const metadata: Metadata = {
   title: "朝山法門 - 靈鷲山朝聖之旅",
@@ -188,6 +189,22 @@ export default function DharmaPage() {
               </div>
             </div>
           </div>
+
+          {/* 影片：朝山功德殊勝行 */}
+          <section aria-labelledby="dharma-video-title">
+            <div className="text-center mb-8">
+              <p className="text-amber-700 font-medium tracking-wider mb-2">
+                影片
+              </p>
+              <h2
+                id="dharma-video-title"
+                className="font-serif text-3xl md:text-4xl font-bold text-amber-900"
+              >
+                朝山功德殊勝行
+              </h2>
+            </div>
+            <YouTubeEmbed videoId="jes38TAcI1s" title="朝山功德殊勝行" />
+          </section>
         </div>
       </div>
     </main>
