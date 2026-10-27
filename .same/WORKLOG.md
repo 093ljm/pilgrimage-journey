@@ -56,6 +56,46 @@ gh auth status 2>&1 | head -2                   # 看能不能推送；未登入
 
 ---
 
+## ⏸️ 暫停／恢復開發（★ 恢復時先讀這段）
+
+> 2026-10-28 最後測試後，專案**暫停數個月**（用戶決定）。未完成的頁面一併暫停。
+> 10/28 收工時要補上：最後測試結果、待辦是否有變動。
+
+### 暫停時的狀態
+- **正式網站維持公開**（用戶 10/27 決定）：https://frolicking-begonia-5ec310.netlify.app（正式網域尚未申請／切換）
+- 已上線：首頁、朝山法門（影片：朝山功德殊勝行）、朝山路線與行儀（影片：朝山步驟）、行前準備、常見問題、
+  法師開示、觀音三會、生命故事（筱喻師姐）、報名表單 `/register`＋後台報名名單、後台 `/admin`（草稿模式）
+- **暫停中（未完成）**：人物／寶物／地點筆記（`src/app/guide/*` 建設中佔位頁）、活動回顧（版型示意）、
+  其他生命故事、正式網域、給管理員的操作說明；其餘見「上架清單」未勾選項目與「待用戶決定」
+- 暫停期間報名表單**仍可送出**，通知寄到 `LJMMKT@ljm.org.tw`
+
+### 帳號與權限（交接必備，請單位保管）
+| 用途 | 帳號／位置 | 備註 |
+|---|---|---|
+| GitHub 倉庫擁有者＝**第一位後台管理員** | `093ljm` | 倉庫 `093ljm/pilgrimage-journey`（公開）。保管密碼＋兩步驟驗證備援碼。9/7 後台測試提交即此帳號 |
+| 第二位後台管理員 | `goodseedsinmind1111-web` | 倉庫 Write 權限 |
+| Netlify | 帳號 `093-marketing`（Free，Owner） | site_id `710de8ac-a67e-456d-93bc-844ea79c914e`；環境變數 `GITHUB_CLIENT_ID`、`GITHUB_CLIENT_SECRET`（後台登入）、`NETLIFY_FORMS_TOKEN`（報名名單） |
+| GitHub OAuth App（後台登入） | 推測在 `093ljm` → Settings → Developer settings → OAuth Apps（待確認） | 換網址時要改 Homepage URL 與 callback URL |
+| 報名通知信箱 | `LJMMKT@ljm.org.tw` | 寄件者 `formresponses@netlify.com` 需加白名單 |
+- **新增後台管理員**：GitHub 倉庫 → Settings → Collaborators → Add people（Write）。**不需要 Netlify 帳號**（公開倉庫不會被擋部署）。
+  有寫入權限的人也看得到後台「報名名單」。
+- **倉庫保護**：ruleset「Protect main」（id `25943648`，10/27 設）禁止強制推送與刪除 `main`，沒有例外帳號。
+  ⚠️ 不要加「Require a pull request」，後台與 AI 都直接寫入 main。
+
+### 暫停期間會／不會發生的事
+- 不部署就不扣點，網站照常運作；管理員從後台**發布**＝部署一次 15 點（每月 300 點，每月 7 日重置）。
+- 若日後 Netlify 建置環境變動導致建置失敗，網站**維持上一版**，不會掛掉；恢復開發時再修。
+- 觀音三會 2026 三個日期已全部過去 → 沒更新就會全顯示「已圓滿」。每年由管理員從後台填新日期（決策：日期由人決定）。
+- `NETLIFY_FORMS_TOKEN` 若到期 → 只有後台「報名名單」打不開，報名與 Email 通知照常 → 產生新權杖填回環境變數即可。
+
+### 恢復開發步驟
+1. 開新對話貼本檔最上方「新對話開場白」→ AI 照「開機檢查」做。Same 專案不在就 `git clone` → `bun install` → `bun run dev`。
+2. **先查套件安全更新**：暫停時 `next` 15.3.9（15.3 系列最新）。查 nextjs.org/blog 與 GitHub Security Advisories，
+   必要時升級 → `bun run lint` → 用戶看預覽 → 推送（部署一次）。
+3. 讀「上架清單」未完成項目與「待用戶決定」，和用戶重排上架時程（原訂 2026-11 中旬，已因暫停延後）。
+
+---
+
 ## 📌 目前狀態（2026-10-27）
 
 | 項目 | 狀態 |
@@ -64,10 +104,10 @@ gh auth status 2>&1 | head -2                   # 看能不能推送；未登入
 | 後台 | `/admin`（GitHub 登入）、`/admin/demo`（示範，不存檔）、`/admin/registrations`（報名名單，後台左下角按鈕） |
 | 報名 | `/register` → Netlify Forms `pilgrimage-registration` → Email 通知 `LJMMKT@ljm.org.tw`；用戶測試全部通過 |
 | GitHub | `093ljm/pilgrimage-journey`，分支 `main`，最新修改**已全部推送** |
-| Netlify 額度 | 10 月週期 10/7～11/6，300 點；已部署 5 次，**用 75 點，剩約 225 點**（表單送出本身免費） |
-| 待上線修改 | 無（10/27 兩支影片已上線，用戶確認可播放） |
-| 用戶下一步 | **10/28 整個部署小測試**；之後彙整可上傳的資料（生命故事、觀音三會日期、法師開示等），從正式後台測試＋發布 |
-| 上架期限 | **2026-11 中旬正式上架**（10/05 用戶調整，原訂 10 月底；時程見「上架清單」） |
+| Netlify 額度 | 10 月週期 10/7～11/6，300 點；已部署 6 次，**用 90 點，剩約 210 點**（表單送出本身免費） |
+| 待上線修改 | 無（10/27 兩支影片＋next 15.3.9 已推送） |
+| 用戶下一步 | **10/28 最後測試**（見工作日誌 10/27「暫停前清單」）→ 收工交接 → **專案暫停數個月** |
+| 上架期限 | ~~2026-11 中旬~~ → **因暫停延後，恢復後重排**（見「⏸️ 暫停／恢復開發」） |
 
 ---
 
@@ -171,7 +211,7 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 - [ ] 觀音三會：填入正確日期與報名資訊，並確認前台更新
 - [ ] 法師開示：確認內容與順序
 - [ ] 給管理人員的操作說明（草稿 → 預備發布 → 發布；發布後等 1～2 分鐘）
-- [ ] **GitHub 禁止強制推送**（用戶 10/05 交代：上架前設定）
+- [x] **GitHub 禁止強制推送**（用戶 10/05 交代：上架前設定）→ 10/27 AI 用 API 設定完成（ruleset id `25943648`）
       倉庫擁有者 093ljm 在 GitHub 網頁：Settings → Rules → Rulesets → New branch ruleset
       → Target 選預設分支（main）→ Enforcement: Active → 只勾 **Block force pushes**、**Restrict deletions** → 儲存。
       ⚠️ **不要勾「Require a pull request」**：後台刪除文章、AI 正常推送都是直接寫入 main，會被擋下。
@@ -241,6 +281,15 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   - 擬暫停前做：禁止強制推送 ruleset（免費）、`next` 升 15.3.9（部署一次，明天測試一併驗證）、
     確認 `NETLIFY_FORMS_TOKEN` 到期日、帳號交接（GitHub 093ljm＋備援碼、Netlify 093-marketing、LJMMKT 信箱）、
     WORKLOG 寫「暫停／恢復開發」段落。待用戶決定：暫停期間網站是否維持公開（報名表單仍可送出）。
+- **用戶決定**：做 A（禁止強制推送）、B（next 升級）；**網站暫停期間維持公開**；D 收工交接說明「太重要了」不要忘。
+  - ✅ A：用 `gh api` 建立 ruleset「Protect main: block force pushes and deletion」（id `25943648`，active，
+    規則 `non_fast_forward`＋`deletion`，目標 `~DEFAULT_BRANCH`，無例外帳號）。未加 Require PR。
+    ※ 這個終端機 heredoc（`<<'EOF'`）會卡住到逾時，改用 `echo '{...}' | gh api --input -`。
+  - ✅ B：`bun add next@15.3.9`（package.json＋bun.lock）。`bun run lint` 通過；重啟開發伺服器（顯示 Next.js 15.3.9），
+    `/`、`/dharma`、`/routes`、`/register`、`/faq`、`/admin`、`/preparation`、`/teachings` 皆 200，`/events` 307 → `/events/info`（與正式網站相同）。
+    與本日誌一起推送 → 10 月第 6 次部署（累計 90 點）；明天的最後測試即驗證此版本。
+  - ✅ D：已先寫好本檔「⏸️ 暫停／恢復開發」段落，10/28 收工時補最後測試結果。
+  - 用戶問「第一位管理員是 GitHub 093ljm？」→ **是**：倉庫協作者 093ljm 為 admin（擁有者），9/7 後台建立／修改測試文章的提交作者即 093ljm。
 
 ### 2026-10-15（討論中，尚未實作）
 - 開機：整個專案資料夾不見 → 從 GitHub 重新 clone ＋ `bun install`；之後 `.git` 又空一次，已搬回。
