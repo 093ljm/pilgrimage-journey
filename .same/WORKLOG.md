@@ -255,6 +255,12 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
   - ★ 原因（GitHub 官方 Email addresses reference）：**Email 未驗證的帳號不能 Authorize OAuth app、也收不到 Email 通知**
     （仍可接受倉庫邀請）→ 兩個症狀都吻合。解法：GitHub → 頭像 → Settings → Emails → Resend verification email → 點信中連結（看垃圾郵件）→ 重新登入 `/admin`。
   - 授權頁寫「Repositories: Public and private」是因登入要求 `repo` 權限（`auth.mjs` 預設 `repo,user`），GitHub 的標準說法；未變更。
+- ✅ Dana 驗證 Email 後**成功登入正式後台**。測觀音三會：誕辰日填 `2027/4/6` 卻顯示「日期 並不符合 格式必須為 年/月/日」。
+  - ★ **後台設定的 bug（一直存在，因觀音三會從沒從後台改過才沒發現）**：`public/admin/config.yml` 日期欄
+    `pattern: ['^\\d{4}/...']` 寫在 YAML **單引號**裡，單引號不處理跳脫 → 實際正規式是 `^\\d{4}`（比對「反斜線＋dddd」），
+    **任何日期都不會通過**。改成單一反斜線 `'^\d{4}/\d{1,2}/\d{1,2}$'`；用 `yaml` 套件解析後測試：
+    `2027/4/6`、`2027/10/14` 通過；全形「／」、全形數字、`2027-4-6`、尾端空白不通過（符合預期）。
+  - `/admin/demo` 與正式後台共用同一份 config.yml → 可先在 Same 預覽 `/admin/demo` 驗證（不扣點），再推送（部署 15 點）。
 
 ### 2026-10-27
 - 開機：`.git` 又空 → 從 GitHub 搬回，與遠端一致（`b87de1f`）；`gh` 已登入可推送；開發伺服器只有一個、正常。
