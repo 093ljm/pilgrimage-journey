@@ -74,6 +74,7 @@ gh auth status 2>&1 | head -2                   # 看能不能推送；未登入
 |---|---|---|
 | GitHub 倉庫擁有者＝**第一位後台管理員** | `093ljm` | 倉庫 `093ljm/pilgrimage-journey`（公開）。保管密碼＋兩步驟驗證備援碼。9/7 後台測試提交即此帳號 |
 | 第二位後台管理員 | `goodseedsinmind1111-web` | 倉庫 Write 權限 |
+| 新同事後台管理員 | `093danawang` | 10/28 送出 Write 邀請（待接受、待測試） |
 | Netlify | 帳號 `093-marketing`（Free，Owner） | site_id `710de8ac-a67e-456d-93bc-844ea79c914e`；環境變數 `GITHUB_CLIENT_ID`、`GITHUB_CLIENT_SECRET`（後台登入）、`NETLIFY_FORMS_TOKEN`（報名名單） |
 | GitHub OAuth App（後台登入） | 推測在 `093ljm` → Settings → Developer settings → OAuth Apps（待確認） | 換網址時要改 Homepage URL 與 callback URL |
 | 報名通知信箱 | `LJMMKT@ljm.org.tw` | 寄件者 `formresponses@netlify.com` 需加白名單 |
@@ -243,6 +244,12 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 ---
 
 ## 📓 工作日誌（新的寫在最上面）
+
+### 2026-10-28（最後測試日）
+- 開機：**整個專案資料夾不見**（預覽空白）→ `git clone` → `bun install`（背景執行約 11 秒）→ `bun run dev`；與遠端一致（`7c68688`），`gh` 已登入。
+- **新同事管理員帳號 `093danawang`**（10/27 建立）：AI 用 `gh api -X PUT .../collaborators/093danawang`（permission `push`＝Write）
+  送出邀請（invite id `340093644`）。**她須先接受邀請**（Email 或 https://github.com/093ljm/pilgrimage-journey/invitations，7 天內有效）
+  → 再到 `/admin` 用 GitHub 登入測試。
 
 ### 2026-10-27
 - 開機：`.git` 又空 → 從 GitHub 搬回，與遠端一致（`b87de1f`）；`gh` 已登入可推送；開發伺服器只有一個、正常。
