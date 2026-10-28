@@ -76,7 +76,7 @@ gh auth status 2>&1 | head -2                   # 看能不能推送；未登入
 | 第二位後台管理員 | `goodseedsinmind1111-web` | 倉庫 Write 權限 |
 | 新同事後台管理員 | `093danawang` | 10/28 送出 Write 邀請（待接受、待測試） |
 | Netlify | 帳號 `093-marketing`（Free，Owner） | site_id `710de8ac-a67e-456d-93bc-844ea79c914e`；環境變數 `GITHUB_CLIENT_ID`、`GITHUB_CLIENT_SECRET`（後台登入）、`NETLIFY_FORMS_TOKEN`（報名名單） |
-| GitHub OAuth App（後台登入） | 推測在 `093ljm` → Settings → Developer settings → OAuth Apps（待確認） | 換網址時要改 Homepage URL 與 callback URL |
+| GitHub OAuth App（後台登入） | 「**093朝山(公號)**」，在 `093ljm` → Settings → Developer settings → OAuth Apps（10/28 由授權頁截圖確認） | 換網址時要改 Homepage URL 與 callback URL。管理員的 GitHub **Email 必須已驗證**才能授權登入 |
 | 報名通知信箱 | `LJMMKT@ljm.org.tw` | 寄件者 `formresponses@netlify.com` 需加白名單 |
 - **新增後台管理員**：GitHub 倉庫 → Settings → Collaborators → Add people（Write）。**不需要 Netlify 帳號**（公開倉庫不會被擋部署）。
   有寫入權限的人也看得到後台「報名名單」。
@@ -250,6 +250,11 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 - **新同事管理員帳號 `093danawang`**（10/27 建立）：AI 用 `gh api -X PUT .../collaborators/093danawang`（permission `push`＝Write）
   送出邀請（invite id `340093644`）。**她須先接受邀請**（Email 或 https://github.com/093ljm/pilgrimage-journey/invitations，7 天內有效）
   → 再到 `/admin` 用 GitHub 登入測試。
+- 查 API：093danawang **已是協作者（write）**＝邀請已接受。但她卡在 GitHub 授權頁，「Authorize 093ljm」按鈕灰色按不下，且信箱沒收到邀請信。
+  - 截圖確認 OAuth App 名稱「**093朝山(公號)** by 093ljm」→ 後台登入 App 在 093ljm 帳號下（交接表已更新）。
+  - ★ 原因（GitHub 官方 Email addresses reference）：**Email 未驗證的帳號不能 Authorize OAuth app、也收不到 Email 通知**
+    （仍可接受倉庫邀請）→ 兩個症狀都吻合。解法：GitHub → 頭像 → Settings → Emails → Resend verification email → 點信中連結（看垃圾郵件）→ 重新登入 `/admin`。
+  - 授權頁寫「Repositories: Public and private」是因登入要求 `repo` 權限（`auth.mjs` 預設 `repo,user`），GitHub 的標準說法；未變更。
 
 ### 2026-10-27
 - 開機：`.git` 又空 → 從 GitHub 搬回，與遠端一致（`b87de1f`）；`gh` 已登入可推送；開發伺服器只有一個、正常。
