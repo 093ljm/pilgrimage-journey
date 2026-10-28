@@ -80,7 +80,7 @@ collections:
             fields:
               - { label: 唯一代號, name: id, widget: string }
               - { label: 名稱, name: name, widget: select, options: [誕辰日, 成道日, 出家日] }
-              - { label: 日期, name: date, widget: string, pattern: ['^\\d{4}/\\d{1,2}/\\d{1,2}$', '格式必須為 年/月/日，例如 2026/4/5'] }
+              - { label: 日期, name: date, widget: string, pattern: ['^\d{4}/\d{1,2}/\d{1,2}$', '格式必須為 年/月/日，例如 2026/4/5'] }
               - { label: 節氣意象, name: season, widget: string }
           - { label: 集合地點, name: location, widget: string }
           - { label: 報名方式, name: registerVia, widget: string }
