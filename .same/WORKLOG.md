@@ -245,6 +245,20 @@ cp ../root/usr/share/fonts/truetype/wqy/*.ttc ~/.local/share/fonts/ 2>/dev/null;
 
 ## 📓 工作日誌（新的寫在最上面）
 
+### 2026-10-29
+- 開機：**整個專案資料夾又不見** → `git clone` → `bun install`（背景，約 43 秒）→ `bun run dev`；與遠端一致（`6771671`）。
+- **用戶提案：觀音三會日期改成只填 8 個數字**（例如 20261130，不用打 / 或 -），加一行填寫規則，網站自動轉換。已實作（**尚未推送，等用戶看預覽**）：
+  - `public/admin/config.yml`：欄名「日期（8 個數字）」；檢查規則 `^20\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$`
+    （擋下非 8 位、月 13、日 32、全形數字、含 /）；錯誤訊息＋`hint` 說明（補 0、例：20270405、20271014）。
+    ※ 2/30 這類不存在的日期擋不到（正規式限制），可接受。
+  - `src/lib/content.ts`：`normalizeAssemblyDate()` 把 `20270405` 轉成畫面用的 `2027/4/5`；舊格式 `2026/4/5`、`2026-4-5`、全形數字也讀得懂。
+    前台元件 `pilgrimage-days.tsx` 不用改。
+  - `content/settings/guanyin-three-assemblies.json`：三個日期改成 `20260405`、`20260801`、`20261025`
+    （★ 必改：否則管理員打開後台時舊值不符新規則，整份無法儲存）。
+  - `src/data/events.ts`：型別註解同步。
+  - `bun run lint` 通過；本機 `/events/info` 200，卡片月份顯示 4、8、10（轉換正常）。
+  - 請用戶看：預覽 `/events/info`（日期照舊）、`/admin/demo` → 最新活動（觀音三會）→ 日期欄的說明與錯誤提示。
+
 ### 2026-10-28（最後測試日）
 - 開機：**整個專案資料夾不見**（預覽空白）→ `git clone` → `bun install`（背景執行約 11 秒）→ `bun run dev`；與遠端一致（`7c68688`），`gh` 已登入。
 - **新同事管理員帳號 `093danawang`**（10/27 建立）：AI 用 `gh api -X PUT .../collaborators/093danawang`（permission `push`＝Write）
