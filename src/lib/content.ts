@@ -88,8 +88,35 @@ export interface GuanyinAssembliesSettings {
   phoneExt: string;
 }
 
+// ============================================================
+// 觀音三會日期：後台填 8 位數字，前台自動轉成「年/月/日」
+// ------------------------------------------------------------
+// ★ 2026-10-29 用戶決定：管理員只填數字（例如 20270405），不必打「/」或「-」，
+//   減少格式錯誤。後台 config.yml 的檢查規則會擋下不是 8 位數字的輸入。
+//   這裡統一轉成畫面使用的「2027/4/5」，前台元件完全不用改。
+//
+//   ※ 為了不讓舊資料失效，以下寫法也都讀得懂：
+//     「2026/4/5」「2026-4-5」、全形數字「２０２７０４０５」。
+// ============================================================
+function normalizeAssemblyDate(raw: unknown): string {
+  const text = String(raw ?? "")
+    .replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+    .trim();
+  const parts =
+    text.match(/^(\d{4})(\d{2})(\d{2})$/) ?? // 20270405
+    text.match(/^(\d{4})\D+(\d{1,2})\D+(\d{1,2})$/); // 2027/4/5、2027-4-5
+  if (!parts) return text;
+  const [, year, month, day] = parts;
+  return `${Number(year)}/${Number(month)}/${Number(day)}`;
+}
 export function getGuanyinAssembliesSettings(): GuanyinAssembliesSettings {
   const file = path.join(contentRoot, "settings", "guanyin-three-assemblies.json");
   const data = JSON.parse(fs.readFileSync(file, "utf8")) as GuanyinAssembliesSettings;
-  return data;
+  return {
+    ...data,
+    annualPilgrimageDays: (data.annualPilgrimageDays ?? []).map((day) => ({
+      ...day,
+      date: normalizeAssemblyDate(day.date),
+    })),
+  };
 }

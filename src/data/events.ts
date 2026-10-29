@@ -16,7 +16,7 @@
 export interface PilgrimageDay {
   id: string;
   name: string;    // 名稱，例如「誕辰日」
-  date: string;    // ★ 格式務必為「年/月/日」，例如 "2026/4/5"
+  date: string;    // ★ 畫面使用「年/月/日」，例如 "2026/4/5"（後台填的 8 位數字由 lib/content.ts 自動轉換）
   season: string;  // 節氣意象，例如「春耕・發願」（顯示於卡片底部）
 }
 

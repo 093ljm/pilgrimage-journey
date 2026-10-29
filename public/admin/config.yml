@@ -80,7 +80,7 @@ collections:
             fields:
               - { label: 唯一代號, name: id, widget: string }
               - { label: 名稱, name: name, widget: select, options: [誕辰日, 成道日, 出家日] }
-              - { label: 日期, name: date, widget: string, pattern: ['^\d{4}/\d{1,2}/\d{1,2}$', '格式必須為 年/月/日，例如 2026/4/5'] }
+              - { label: 日期（8 個數字）, name: date, widget: string, pattern: ['^20\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$', '請填 8 個半形數字：年 4 位＋月 2 位＋日 2 位，例如 2027年4月5日 請填 20270405'], hint: "只填數字，不用加「/」或「-」：年（4 位）＋月（2 位）＋日（2 位），共 8 個數字。月或日是個位數時，前面補 0。例如 2027年4月5日 → 20270405；2027年10月14日 → 20271014。網站會自動顯示成 4/5、10/14。" }
               - { label: 節氣意象, name: season, widget: string }
           - { label: 集合地點, name: location, widget: string }
           - { label: 報名方式, name: registerVia, widget: string }
